@@ -1,0 +1,6 @@
+include README.md
+include LICENSE.txt
+include MANIFEST.in
+recursive-include socib_cms/templates *
+recursive-include socib_cms/static *
+recursive-include socib_cms/locale *

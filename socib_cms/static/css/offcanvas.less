@@ -1,0 +1,45 @@
+/*
+ * off canvas
+ * --------------------------------------------
+ */
+@media screen {
+  .row-offcanvas {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    top: 52px;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+
+    .leaflet-left .leaflet-control {
+      margin-left: 40px;
+    }
+  }
+
+  .offcanvas-button{
+      position: fixed;
+      top: 110px;
+      z-index: 10;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -500px;
+  }
+
+  .row-offcanvas-left.active {
+    left: 500px;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 500px;
+    padding: 5px 20px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: 3px solid #4285f4;
+  }
+}

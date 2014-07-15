@@ -1,0 +1,174 @@
+/* Custom page CSS
+-------------------------------------------------- */
+@import "../bootstrap/less/variables.less";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+body > .container {
+  padding: 60px 15px 20px 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.hidden{
+  display: none;
+}
+
+.table-container th.asc:after {
+  content: '\0000a0\0025b2';
+}
+.table-container th.desc:after {
+  content: '\0000a0\0025bc';
+}
+.table-condensed > tbody > tr > td{
+  white-space: nowrap;
+}
+
+.page-content{
+  img{
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+.story-img {
+  margin-top:25%;
+  display:block;
+}
+
+.list-children-pages{
+  .panel-body{
+    border-top: 2px solid;
+    background-color: #f5f5f5;
+    min-height: 145px;
+  }
+}
+
+.img-responsive{
+  width: 100%;
+}
+
+.page-home .breadcrumb{
+  display: none;
+}
+
+.breadcrumb li.page-home a span{
+  display:none;
+}
+
+.breadcrumb li.page-home a:after{
+  content: "\e021";
+  font-family:"Glyphicons Halflings";
+  line-height:1;
+}
+
+.news-info {
+  border-bottom: 1px solid #efefef;
+  padding: 0 0 3px 0;
+  font-size: 11px;
+  font-weight: normal;
+  margin-top: -5px;
+}
+
+.panel-body{
+  text-align: justify;
+}
+
+.pagination-wrapper{
+  float: right;
+}
+
+ul.pagination {
+  margin: 20px 0;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+  *zoom: 1;
+}
+ul.pagination:before,
+ul.pagination:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+ul.pagination:after {
+  clear: both;
+}
+ul.pagination a,
+ul.pagination span {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+ul.pagination .cardinality{
+    display: none;
+}
+
+/*
+ * menu lists
+ */
+ul.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  li:first-child {
+    border-top: 2px solid;
+  }
+  li{
+    li:first-child {
+      border-top: none;
+    }
+    border-bottom: 2px solid #FFFFFF;
+    padding: 10px 0;
+    a {
+      padding-left: 10px;
+    }
+    &.active{
+      background-color: @gray-light;
+      a{
+        color: @brand-info;
+      }
+      li a {
+        color: #FFFFFF;
+      }
+    }
+  }
+  ul {
+    margin-top: 10px;
+    list-style: square;
+    list-style-position:inside;
+    border: none;
+    background-color: inherit;
+    li {
+      padding-left: 20px;
+      border-bottom: none;
+      a {
+        padding-left: 0;
+      }
+      &.active{
+        a {
+            color: #ffaa01;
+        }
+      }
+    }
+  }
+}
+
+@import "headernav.less";
+@import "footer.less";
+@import "map.less";
+@import "offcanvas.less";

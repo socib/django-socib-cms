@@ -1,0 +1,17 @@
+{% load mptt_tags %}
+{% load i18n %}
+{% load localeurl_tags %}
+
+<ol class="breadcrumb">
+  {% for node in page.get_ancestors %}
+  <li class="{{ node.css_class }}">
+    {% if node.container %}
+    <a><span>{{ node.title }}</span></a>
+    {% else %}
+    <a href="{{ node.url|chlocale:LANGUAGE_CODE  }}"><span>{{ node.title }}</span></a>
+    {% endif %}
+  </li>
+  {% endfor %}
+  <li class="active">{{ page.title }}
+  </li>
+</ol>

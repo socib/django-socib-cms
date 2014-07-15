@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load envelope_tags %}
+
+{% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
+
+{% block title %}
+{{ page.title }}
+{% endblock %}
+{% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
+
+{% block breadscrumbs %}
+{% include '_breadcumb.html' %}
+{% endblock %}
+
+{% block content %}
+{{ page.content|safe }}
+{% render_contact_form %}
+{% endblock %}
+

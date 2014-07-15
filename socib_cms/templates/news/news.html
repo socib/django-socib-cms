@@ -1,0 +1,75 @@
+{% extends "news/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+{% load localeurl_tags %}
+
+{% block title_head %}{{ block.super }}: {{ news.title }}{% endblock %}
+
+{% block title %}
+{{ news.title }}
+{% endblock %}
+
+{% block extra-heading %}
+<div class="news-info">
+  {{ news.publish_date|date:"SHORT_DATE_FORMAT" }}
+</div>
+{% endblock %}
+
+{% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
+
+{% block breadscrumbs %}
+<ol class="breadcrumb">
+  {% for node in page.get_ancestors %}
+  <li class="{{ node.css_class }}">
+    {% if node.container %}
+    <a><span>{{ node.title }}</span></a>
+    {% else %}
+    <a href="{{ node.url|chlocale:LANGUAGE_CODE  }}"><span>{{ node.title }}</span></a>
+    {% endif %}
+  </li>
+  {% endfor %}
+  <li ><a href="{% url 'news_category_detail' news.category.slug %}">{{ page.title }}</a>
+  </li>
+  <li class="active">{{ news.title|truncatechars:70 }}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-9 col-sm-8">
+    {{ news.content|safe }}
+  </div>
+  <div class="col-md-3 col-sm-4">
+    {% if news.picture %}
+      <img src="{% thumbnail news.picture 250x0 crop %}" class="img-responsive">
+    {% endif %}
+    <h3>{% trans "Latests news" %}</h3>
+    <div class="list-group">
+    {% for item in news.category.news_set.latest10 %}
+        {% if item != news %}
+        <a class="list-group-item" href="{{ item.get_absolute_url }}">{{ item.title|truncatechars:60 }}</a>
+        {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+  $(function() {
+    $(".navbar li a[href='{% url 'news_category_detail' news.category.slug %}']").parent().addClass('active');
+    // Menu active from submenu:
+    $('li.active').each(function(){
+      var parent = $(this).parent().parent();
+      if (parent.get(0).tagName == 'LI' && !parent.hasClass('change-lang')){
+        parent.addClass('active');
+      }
+    });
+  });
+</script>
+{% endblock page_js %}
+

@@ -1,0 +1,9 @@
+{% load i18n %}
+{% trans "Message from the contact form" %}
+{% trans "Sender" %}: {{ sender }} ({{ email }})
+{% trans "Institution/Association" %}: {{ institution }}
+{% trans "Location" %}: {{ location }}
+
+{% trans "Message:" %}
+{{ message }}
+

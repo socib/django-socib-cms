@@ -1,0 +1,72 @@
+{% extends "pages/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+{% load localeurl_tags %}
+
+{% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
+
+{% block title %}
+{{ page.title }}
+{% endblock %}
+{% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
+
+{% block breadscrumbs %}
+{% include '_breadcumb.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3 col-sm-4 col-xs-12">
+      <ul class="menu-list">
+      {% recursetree page.sector.get_descendants %}
+        {% if not node.registration_required or user.is_authenticated %}
+          {% if not node.hide %}
+            <li {% if node == page %}class="active"{% endif %}>
+              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title|truncatechars:60 }}</a>
+            {% if not node.is_leaf_node %}
+              <ul class="menu-list">
+                  {{ children }}
+              </ul>
+            {% endif %}
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endrecursetree %}
+      </ul>
+  </div>
+  <div class="col-md-9 col-sm-8 col-xs-12">
+    <div class="page-content">
+      {{ page.content|safe }}
+    </div>
+
+    {% if page.list_children %}
+      <div class="row list-children-pages">
+      {% recursetree page.children %}
+        {% if not node.registration_required or user.is_authenticated %}
+          {% if not node.hide %}
+        <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
+          <div class="panel panel-default">
+            <div class="panel-thumbnail">
+            {% if node.picture %}
+              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
+            {% else %}
+              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
+            {% endif %}
+            </div>
+            <div class="panel-body">
+              <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title }}</a></p>
+              <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
+            </div>
+          </div>
+        </div>
+          {% endif %}
+        {% endif %}
+      {% endrecursetree %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

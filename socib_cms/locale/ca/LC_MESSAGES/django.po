@@ -1,0 +1,321 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-15 12:14+0200\n"
+"PO-Revision-Date: 2014-07-15 12:30+0100\n"
+"Last-Translator: Biel Frontera <bfrontera@socib.es>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: news/models.py:11
+msgid "name"
+msgstr "nom"
+
+#: news/models.py:12
+#: news/models.py:51
+msgid "slug"
+msgstr "slug"
+
+#: news/models.py:15
+msgid "news category"
+msgstr "categoria de notícies"
+
+#: news/models.py:16
+msgid "news categories"
+msgstr "categories de notícies"
+
+#: news/models.py:42
+msgid "category"
+msgstr "categoria"
+
+#: news/models.py:43
+msgid "publishing date"
+msgstr "data de publicació"
+
+#: news/models.py:44
+msgid "draft"
+msgstr "esborrany"
+
+#: news/models.py:45
+msgid "title"
+msgstr "títol"
+
+#: news/models.py:46
+msgid "content"
+msgstr "contingut"
+
+#: news/models.py:47
+#: pages/models.py:13
+msgid "Introduction"
+msgstr "Introducció"
+
+#: news/models.py:49
+msgid "redirect link"
+msgstr "redirecció"
+
+#: news/models.py:52
+msgid "related news"
+msgstr "notícies relacionades"
+
+#: news/models.py:54
+#: pages/models.py:25
+msgid "picture"
+msgstr "fotografia"
+
+#: news/models.py:55
+#: pages/models.py:26
+msgid "CSS class"
+msgstr "classe CSS"
+
+#: news/models.py:61
+msgid "date added"
+msgstr "data de creació"
+
+#: news/models.py:64
+msgid "created by"
+msgstr "creat per"
+
+#: news/models.py:65
+msgid "date modified"
+msgstr "data de modificació"
+
+#: news/models.py:68
+msgid "update by"
+msgstr "actualitzat per"
+
+#: news/models.py:71
+#: news/models.py:72
+#: templates/_header_nav.html:51
+msgid "news"
+msgstr "notícies"
+
+#: pages/forms.py:11
+msgid "first name"
+msgstr "nom"
+
+#: pages/forms.py:12
+msgid "last name"
+msgstr "llinatges"
+
+#: pages/forms.py:13
+msgid "email address"
+msgstr "correu electrònic"
+
+#: pages/forms.py:14
+msgid "old password"
+msgstr "contrasenya anteriro"
+
+#: pages/forms.py:16
+msgid "new password"
+msgstr "nova contrasenya"
+
+#: pages/forms.py:18
+msgid "repeat password"
+msgstr "repeteixi la contrasenya"
+
+#: pages/forms.py:29
+msgid "Old password is not correct"
+msgstr "La contrasenya anterior és incorrecta"
+
+#: pages/forms.py:41
+msgid "New and repeat passwords don't match"
+msgstr "Les contrasenyes no coincideixen"
+
+#: pages/forms.py:45
+msgid "You must indicate old password to change it"
+msgstr "Heu d'introduir l'antiga contrasenya per poder-la canviar"
+
+#: pages/forms.py:55
+#, python-format
+msgid "%s Save"
+msgstr "%s Desa"
+
+#: pages/forms.py:63
+msgid "Change password (optional)"
+msgstr "Canvia la contrasenya (opcional="
+
+#: pages/forms.py:81
+msgid "institution/association"
+msgstr "institució/associació"
+
+#: pages/forms.py:82
+msgid "location"
+msgstr "ubicació"
+
+#: pages/forms.py:90
+#, python-format
+msgid "%s  Send message"
+msgstr "%s Envia el missatge"
+
+#: pages/forms.py:100
+msgid "Message"
+msgstr "Missatge"
+
+#: pages/models.py:11
+msgid "Short title for menu"
+msgstr "Títol curt per al menú"
+
+#: pages/models.py:12
+msgid "order"
+msgstr "ordre"
+
+#: pages/models.py:16
+msgid "related pages"
+msgstr "pàgines relacionades"
+
+#: pages/models.py:18
+msgid "user groups allowed"
+msgstr "grups permessos"
+
+#: pages/models.py:20
+msgid "page is just a container"
+msgstr "la pàgina és només un contenedor"
+
+#: pages/models.py:21
+msgid "hide this page in lists"
+msgstr "amaga aquesta pàgina a les llistes"
+
+#: pages/models.py:23
+msgid "list children pages inside this page content"
+msgstr "mostra una llista de les pàgines filles a dins del contingut d'aquesta pàgina"
+
+#: pages/views.py:66
+msgid "Page not found"
+msgstr "Pàgina no trobada"
+
+#: pages/views.py:105
+msgid "Profile updated"
+msgstr "Perfil actualitzat"
+
+#: pages/views.py:119
+msgid "Contact"
+msgstr "Contacta"
+
+#: templates/500.html:18
+msgid "Server error"
+msgstr "Error al servidor"
+
+#: templates/_header_nav.html:42
+msgid "Administration"
+msgstr "Administració"
+
+#: templates/_header_nav.html:45
+msgid "Modify this news"
+msgstr "Modifica aquesta notícia"
+
+#: templates/_header_nav.html:48
+msgid "Modify this page"
+msgstr "Modifica aquesta pàgina"
+
+#: templates/_header_nav.html:50
+msgid "pages"
+msgstr "pàgines"
+
+#: templates/_header_nav.html:53
+msgid "users"
+msgstr "usuaris"
+
+#: templates/_header_nav.html:54
+msgid "groups"
+msgstr "grups"
+
+#: templates/_header_nav.html:60
+msgid "Change language"
+msgstr "Canvia l'idioma"
+
+#: templates/_header_nav.html:75
+msgid "Change profile"
+msgstr "Canvia el perfil"
+
+#: templates/_header_nav.html:76
+msgid "Logout"
+msgstr "Surt"
+
+#: templates/envelope/email_body.txt:2
+msgid "Message from the contact form"
+msgstr "Missatge des del formulari de contacte"
+
+#: templates/envelope/email_body.txt:3
+msgid "Sender"
+msgstr "De"
+
+#: templates/envelope/email_body.txt:4
+msgid "Institution/Association"
+msgstr "Institució/Associació"
+
+#: templates/envelope/email_body.txt:5
+msgid "Location"
+msgstr "Ubicació"
+
+#: templates/envelope/email_body.txt:7
+msgid "Message:"
+msgstr "Missatge:"
+
+#: templates/news/category.html:53
+#: templates/news/category.html.py:55
+msgid "previous"
+msgstr "anterior"
+
+#: templates/news/category.html:71
+#: templates/news/category.html.py:73
+msgid "next"
+msgstr "posterior"
+
+#: templates/news/news.html:49
+msgid "Latests news"
+msgstr "Darreres notícies"
+
+#: templates/pages/home.html:5
+msgid "Home"
+msgstr "Portada"
+
+#: templates/password_reset/recovery_form.html:4
+msgid "Password recovery"
+msgstr "Recuperació de la contrasenya"
+
+#: templates/password_reset/recovery_form.html:13
+#: templates/registration/login.html:41
+msgid "Recover my password"
+msgstr "Recupera la meva contrasenya"
+
+#: templates/password_reset/reset.html:4
+msgid "Password reset"
+msgstr "Reincia la contrasenya"
+
+#: templates/password_reset/reset.html:8
+#, python-format
+msgid "Sorry, this password reset link is invalid. You can still <a href=\"%(recovery_url)s\">request a new one</a>."
+msgstr "Aquesta direcció de recuperació de la contrasenya és invàlida. <a href=\"%(recovery_url)s\">Sol·licita una nova contrasenya</a>."
+
+#: templates/password_reset/reset.html:12
+#, python-format
+msgid "Hi, <strong>%(username)s</strong>. Please choose your new password."
+msgstr "Hola, <strong>%(username)s</strong>. Per favor, indica la teva nova contrasenya."
+
+#: templates/password_reset/reset.html:17
+msgid "Set new password"
+msgstr "Desa la nova contrasenya"
+
+#: templates/registration/login.html:4
+msgid "Welcome"
+msgstr "Benvingut/da"
+
+#: templates/registration/login.html:9
+#: templates/registration/login.html:37
+msgid "Login"
+msgstr "Identificació"
+
+#: templates/registration/login.html:13
+msgid "Your username and password did not match. Please try again."
+msgstr "L'usuari i la contrasenya no concorden. Prova una altra vegada."
+

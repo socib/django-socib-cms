@@ -1,0 +1,104 @@
+{% extends "news/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+{% load localeurl_tags %}
+{% load humanize %}
+{% load socib_extras %}
+{% load querystring from django_tables2 %}
+
+{% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
+
+{% block title %}
+{{ page.title }}
+{% endblock %}
+{% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
+
+{% block breadscrumbs %}
+{% include '_breadcumb.html' %}
+{% endblock %}
+
+{% block content %}
+{{ page.content|safe }}
+
+{% for news in news_list %}
+  <div class="row">
+    <div class="col-md-2 col-sm-3 text-center news-picture">
+      {% if news.picture %}
+        <a href="{% url 'news_detail' category.slug news.slug %}" class="story-img"><img src="{% thumbnail news.picture 100x100 upscale crop subject_location=news.picture.subject_location  %}" class="img-circle"></a>
+      {% endif %}
+    </div>
+    <div class="col-md-10 col-sm-9 news-content">
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <h3><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h3>
+          <p>{% if news.introduction %}{{ news.introduction }}{% else %}{{ news.content|safe|striptags|truncatewords_html:50 }}{% endif %}</p>
+          <p class="pull-right">
+            {% for tag in news.tags.all %}
+            <span class="label label-default">{{ tag }}</span>
+            {% endfor %}
+          </p>
+          <ul class="list-inline"><li><a href="{{ news.get_absolute_url }}">{{ news.publish_date|naturalday }}</a></li> | <li><a href="#"><i class="glyphicon glyphicon-share"></i> Share</a></li></ul>
+          </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+  <hr>
+{% endfor %}
+<div class="pagination-wrapper">
+  <ul class="pagination">
+      {% if news_list.has_previous %}
+          <li><a href="{% querystring "page"=news_list.previous_page_number %}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+      {% else %}
+          <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+      {% endif %}
+      {% for page in news_list.paginator.page_range %}
+          {% if page == 1  or page == news_list.paginator.num_pages or page < news_list.number|add:3 and page > news_list.number|subtract:3 %}
+              {% ifequal page news_list.number %}
+                  <li class="current page active"><a href="#">{{ page }}</a></li>
+              {% else %}
+                  <li><a href="{% querystring "page"=page %}" class="page">{{ page }}</a></li>
+              {% endifequal %}
+          {% else %}
+              {% if page == news_list.number|add:3 or page == news_list.number|subtract:3 %}
+              <li><a href="#">...</a></li>
+              {% endif %}
+          {% endif %}
+      {% endfor %}
+      {% if news_list.has_next %}
+          <li><a href="{% querystring "page"=news_list.next_page_number %}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+      {% else %}
+          <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+      {% endif %}
+  </ul>
+</div>
+
+
+{% if page.list_children %}
+  <div class="row list-children-pages">
+  {% recursetree page.children %}
+    {% if not node.registration_required or user.is_authenticated %}
+    <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
+      <div class="panel panel-default">
+        <div class="panel-thumbnail">
+        {% if node.picture %}
+          <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
+        {% else %}
+          <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
+        {% endif %}
+        </div>
+        <div class="panel-body">
+          <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title }}</a></p>
+          <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endrecursetree %}
+  </div>
+{% endif %}
+
+{% endblock %}
+

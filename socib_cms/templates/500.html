@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load staticfiles %}
+{% load compress %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block head_title %}Error{% endblock %}</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>{% block title %}500 error page{% endblock %}</h1>
+      </div>
+      <div class="content">
+        {% trans "Server error" %}
+      </div>
+    </div>
+    <div id="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,609 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-15 12:15+0200\n"
+"PO-Revision-Date: 2014-07-15 12:37+0100\n"
+"Last-Translator: Biel Frontera <bfrontera@socib.es>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: news/models.py:11
+msgid "name"
+msgstr "nombre"
+
+#: news/models.py:12
+#: news/models.py:51
+msgid "slug"
+msgstr "slug"
+
+#: news/models.py:15
+msgid "news category"
+msgstr "categoría de noticias"
+
+#: news/models.py:16
+msgid "news categories"
+msgstr "categorías de notícias"
+
+#: news/models.py:42
+msgid "category"
+msgstr "categoría"
+
+#: news/models.py:43
+msgid "publishing date"
+msgstr "fecha de publicación"
+
+#: news/models.py:44
+msgid "draft"
+msgstr "borrador"
+
+#: news/models.py:45
+msgid "title"
+msgstr "título"
+
+#: news/models.py:46
+msgid "content"
+msgstr "contenido"
+
+#: news/models.py:47
+#: pages/models.py:13
+msgid "Introduction"
+msgstr "Introducción"
+
+#: news/models.py:49
+msgid "redirect link"
+msgstr "URL redirección"
+
+#: news/models.py:52
+msgid "related news"
+msgstr "notícias relacionadas"
+
+#: news/models.py:54
+#: pages/models.py:25
+msgid "picture"
+msgstr "fotografía"
+
+#: news/models.py:55
+#: pages/models.py:26
+msgid "CSS class"
+msgstr "clase CSS"
+
+#: news/models.py:61
+msgid "date added"
+msgstr "fecha alta"
+
+#: news/models.py:64
+msgid "created by"
+msgstr "creado por"
+
+#: news/models.py:65
+msgid "date modified"
+msgstr "fecha modificación"
+
+#: news/models.py:68
+msgid "update by"
+msgstr "actualizado por"
+
+#: news/models.py:71
+#: news/models.py:72
+#: templates/_header_nav.html:51
+msgid "news"
+msgstr "notícia"
+
+#: pages/forms.py:11
+msgid "first name"
+msgstr "nombre"
+
+#: pages/forms.py:12
+msgid "last name"
+msgstr "apellidos"
+
+#: pages/forms.py:13
+msgid "email address"
+msgstr "correo electrónico"
+
+#: pages/forms.py:14
+msgid "old password"
+msgstr "contraseña actual"
+
+#: pages/forms.py:16
+msgid "new password"
+msgstr "nueva contraseña"
+
+#: pages/forms.py:18
+msgid "repeat password"
+msgstr "repite la contraseña"
+
+#: pages/forms.py:29
+msgid "Old password is not correct"
+msgstr "La antigua contraseña no es correcta"
+
+#: pages/forms.py:41
+msgid "New and repeat passwords don't match"
+msgstr "Las nuevas contraseñas no coinciden"
+
+#: pages/forms.py:45
+msgid "You must indicate old password to change it"
+msgstr "Debes introducir la contraseña actual para poder cambiarla"
+
+#: pages/forms.py:55
+#, python-format
+msgid "%s Save"
+msgstr "%s Guarda"
+
+#: pages/forms.py:63
+msgid "Change password (optional)"
+msgstr "Cambia la contraseña (opcional)"
+
+#: pages/forms.py:81
+msgid "institution/association"
+msgstr "institución/asociación"
+
+#: pages/forms.py:82
+msgid "location"
+msgstr "ubicación"
+
+#: pages/forms.py:90
+#, python-format
+msgid "%s  Send message"
+msgstr "%s Enviar mensaje"
+
+#: pages/forms.py:100
+msgid "Message"
+msgstr "Mensaje"
+
+#: pages/models.py:11
+msgid "Short title for menu"
+msgstr "Título corto para el menú"
+
+#: pages/models.py:12
+msgid "order"
+msgstr "orden"
+
+#: pages/models.py:16
+msgid "related pages"
+msgstr "páginas relacionadas"
+
+#: pages/models.py:18
+msgid "user groups allowed"
+msgstr "grupos permitidos"
+
+#: pages/models.py:20
+msgid "page is just a container"
+msgstr "la página es un contenedor"
+
+#: pages/models.py:21
+msgid "hide this page in lists"
+msgstr "no muestres esta página en las listas"
+
+#: pages/models.py:23
+msgid "list children pages inside this page content"
+msgstr "muestra una lista de las páginas hijas en el contenido de esta página"
+
+#: pages/views.py:66
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+#: pages/views.py:105
+msgid "Profile updated"
+msgstr "Perfil actualizado"
+
+#: pages/views.py:119
+msgid "Contact"
+msgstr "Contacto"
+
+#: templates/500.html:18
+msgid "Server error"
+msgstr "Error en el servidor"
+
+#: templates/_header_nav.html:42
+msgid "Administration"
+msgstr "Administración"
+
+#: templates/_header_nav.html:45
+msgid "Modify this news"
+msgstr "Modifica esta notícia"
+
+#: templates/_header_nav.html:48
+msgid "Modify this page"
+msgstr "Modifica esta página"
+
+#: templates/_header_nav.html:50
+msgid "pages"
+msgstr "páginas"
+
+#: templates/_header_nav.html:53
+msgid "users"
+msgstr "usuarios"
+
+#: templates/_header_nav.html:54
+msgid "groups"
+msgstr "grupos"
+
+#: templates/_header_nav.html:60
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+#: templates/_header_nav.html:75
+msgid "Change profile"
+msgstr "Modifica el perfil"
+
+#: templates/_header_nav.html:76
+msgid "Logout"
+msgstr "Salir"
+
+#: templates/envelope/email_body.txt:2
+msgid "Message from the contact form"
+msgstr "Mensaje desde el formulario de contacto"
+
+#: templates/envelope/email_body.txt:3
+msgid "Sender"
+msgstr "De"
+
+#: templates/envelope/email_body.txt:4
+msgid "Institution/Association"
+msgstr "Institución/Asociación"
+
+#: templates/envelope/email_body.txt:5
+msgid "Location"
+msgstr "Ubicación"
+
+#: templates/envelope/email_body.txt:7
+msgid "Message:"
+msgstr "Mensaje:"
+
+#: templates/news/category.html:53
+#: templates/news/category.html.py:55
+msgid "previous"
+msgstr "anterior"
+
+#: templates/news/category.html:71
+#: templates/news/category.html.py:73
+msgid "next"
+msgstr "posterior"
+
+#: templates/news/news.html:49
+msgid "Latests news"
+msgstr "Últimas notícias"
+
+#: templates/pages/home.html:5
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/password_reset/recovery_form.html:4
+msgid "Password recovery"
+msgstr "Recupera la contraseña"
+
+#: templates/password_reset/recovery_form.html:13
+#: templates/registration/login.html:41
+msgid "Recover my password"
+msgstr "Recupera la contraseña"
+
+#: templates/password_reset/reset.html:4
+msgid "Password reset"
+msgstr "Nueva contraseña"
+
+#: templates/password_reset/reset.html:8
+#, python-format
+msgid "Sorry, this password reset link is invalid. You can still <a href=\"%(recovery_url)s\">request a new one</a>."
+msgstr "El enlace para recuperar la contraseña es inválido.  Puedes solicitar un <a href=\"%(recovery_url)s\">nuevo enlace para recuperar la contraseña</a>."
+
+#: templates/password_reset/reset.html:12
+#, python-format
+msgid "Hi, <strong>%(username)s</strong>. Please choose your new password."
+msgstr "Hola, <strong>%(username)s</strong>. Introduce tu nueva contraseña."
+
+#: templates/password_reset/reset.html:17
+msgid "Set new password"
+msgstr "Guarda la nueva contraseña"
+
+#: templates/registration/login.html:4
+msgid "Welcome"
+msgstr "Bienvenido/a"
+
+#: templates/registration/login.html:9
+#: templates/registration/login.html:37
+msgid "Login"
+msgstr "Identificación"
+
+#: templates/registration/login.html:13
+msgid "Your username and password did not match. Please try again."
+msgstr "El usuario y contraseña no son correctos. Prueba otra vez o contacta con el administrador de la aplicación"
+
+#~ msgid "Update"
+#~ msgstr "Actualiza"
+
+#~ msgid "Fill jellyfish specie or set quantity to none"
+#~ msgstr "Informa la especie de medusa o deja la cantidad a cero"
+
+#~ msgid "Fill quantity or set specie to none"
+#~ msgstr "Indica la cantidad o deja en blanco la especie"
+
+#~ msgid "Sting incidents can not be greater than total incidents"
+#~ msgstr ""
+#~ "El número de picaduras no puede ser mayor que el total de incidencias"
+
+#~ msgid "%s observation"
+#~ msgstr "%s observación"
+
+#~ msgid "%s Create observation and continue with next station"
+#~ msgstr "%s Guarda y pasa al siguiente punto"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancela"
+
+#~ msgid "When / Where"
+#~ msgstr "Cuándo / Dónde"
+
+#~ msgid "Jellyfish observation"
+#~ msgstr "Observación de medusas"
+
+#~ msgid "Incidents during the day"
+#~ msgstr "Incidencias al largo del día"
+
+#~ msgid "None"
+#~ msgstr "Ninguna"
+
+#~ msgid "Create"
+#~ msgstr "Crea"
+
+#~ msgid "observation date"
+#~ msgstr "Fecha de la observación"
+
+#~ msgid "Create bulk no-observations"
+#~ msgstr "Crea no-observaciones masivas"
+
+#~ msgid "specie"
+#~ msgstr "especie"
+
+#~ msgid "Specie: all"
+#~ msgstr "Especie: todas"
+
+#~ msgid "User: all"
+#~ msgstr "Usuario: todos"
+
+#~ msgid "observation route"
+#~ msgstr "ruta de observación"
+
+#~ msgid "Route: all"
+#~ msgstr "Ruta: todas"
+
+#~ msgid "observation station"
+#~ msgstr "punto de observación"
+
+#~ msgid "Station: all"
+#~ msgstr "Puntos: todos"
+
+#~ msgid "source"
+#~ msgstr "fuente"
+
+#~ msgid "from date"
+#~ msgstr "desde fecha"
+
+#~ msgid "Filter"
+#~ msgstr "Filtra"
+
+#~ msgid "Export"
+#~ msgstr "Exporta"
+
+#~ msgid "scientific name"
+#~ msgstr "nombre científico"
+
+#~ msgid "common name"
+#~ msgstr "nombre común"
+
+#~ msgid "description"
+#~ msgstr "descripción"
+
+#~ msgid "display order"
+#~ msgstr "Orden visualización"
+
+#~ msgid "jellyfish specie"
+#~ msgstr "especie de medusa"
+
+#~ msgid "jellyfish species"
+#~ msgstr "especies de medusa"
+
+#~ msgid "Marine reserve"
+#~ msgstr "Reserva marina"
+
+#~ msgid "Cleaning route"
+#~ msgstr "Ruta de limpieza"
+
+#~ msgid "Beach watching"
+#~ msgstr "Vigilancia playa"
+
+#~ msgid "code"
+#~ msgstr "código"
+
+#~ msgid "type"
+#~ msgstr "tipo"
+
+#~ msgid "island"
+#~ msgstr "isla"
+
+#~ msgid "municipality"
+#~ msgstr "municipio"
+
+#~ msgid "observation routes"
+#~ msgstr "rutas de observación"
+
+#~ msgid "High sea"
+#~ msgstr "En el mar"
+
+#~ msgid "Offshore - 200 m"
+#~ msgstr "Lejos de la costa - 200m"
+
+#~ msgid "Nearshore - 100 m"
+#~ msgstr "Cerca de la costa - 100m"
+
+#~ msgid "Beach shore"
+#~ msgstr "Orilla (Playa)"
+
+#~ msgid "order in route"
+#~ msgstr "orden en la ruta"
+
+#~ msgid "position"
+#~ msgstr "posición"
+
+#~ msgid "observation stations"
+#~ msgstr "punto de observación"
+
+#~ msgid "Web Form"
+#~ msgstr "Formulario web"
+
+#~ msgid "Web Form (Bulk)"
+#~ msgstr "Formulario web (masiva)"
+
+#~ msgid "API"
+#~ msgstr "API"
+
+#~ msgid "Bulk upload"
+#~ msgstr "importación masiva"
+
+#~ msgid "One"
+#~ msgstr "Una"
+
+#~ msgid "2 to 5"
+#~ msgstr "2 hasta 5"
+
+#~ msgid "6 to 10"
+#~ msgstr "6 hasta 10"
+
+#~ msgid "11 to 99"
+#~ msgstr "11 hasta 99"
+
+#~ msgid "100 or more"
+#~ msgstr "100 o más"
+
+#~ msgid "observation date and time"
+#~ msgstr "fecha y hora observación"
+
+#~ msgid "quantity observed"
+#~ msgstr "cantidad observada"
+
+#~ msgid "remarks"
+#~ msgstr "comentarios"
+
+#~ msgid "total sting incidents"
+#~ msgstr "picaduras totales"
+
+#~ msgid "total incidents"
+#~ msgstr "incidentes totales"
+
+#~ msgid "jellyfish observation"
+#~ msgstr "observación de medusas"
+
+#~ msgid "jellyfish observations"
+#~ msgstr "observaciones de medusas"
+
+#~ msgid "create observation"
+#~ msgstr "Crea observación"
+
+#~ msgid "create bulk no-observations"
+#~ msgstr "Crea no-observaciones masivas"
+
+#~ msgid "Observation created"
+#~ msgstr "Observación creada"
+
+#~ msgid "Observation updated"
+#~ msgstr "Observaciçon actualizada"
+
+#~ msgid "Route reference missed"
+#~ msgstr "Referencia de la ruta no encontrada"
+
+#~ msgid "Observations created"
+#~ msgstr "Observaciones creadas"
+
+#~ msgid "Observation deleted"
+#~ msgstr "Observación borrada"
+
+#~ msgid "Website"
+#~ msgstr "Sitio web"
+
+#~ msgid "Observations"
+#~ msgstr "Observaciones"
+
+#~ msgid "Routes"
+#~ msgstr "Rutas"
+
+#~ msgid "Beaches"
+#~ msgstr "Playas"
+
+#~ msgid "Create Bulk Observations"
+#~ msgstr "Crea observaciones"
+
+#~ msgid "Create Observation"
+#~ msgstr "Alta de observación"
+
+#~ msgid "Observation Heatmap"
+#~ msgstr "Mapa de calor"
+
+#~ msgid "Show observation list"
+#~ msgstr "Muesta la lista de observaciones"
+
+#~ msgid "Show observation map"
+#~ msgstr "Muestra el mapa"
+
+#~ msgid "No observations found"
+#~ msgstr "No se ha encontrado ninguna observación"
+
+#~ msgid "Observation List"
+#~ msgstr "Lista de observaciones"
+
+#~ msgid "Show observation heatmap"
+#~ msgstr "Muestra el mapa de calor"
+
+#~ msgid "Add"
+#~ msgstr "Nueva"
+
+#~ msgid "Add bulk no-observations"
+#~ msgstr "Alta no-observaciones masivas"
+
+#~ msgid "Observation Map"
+#~ msgstr "Mapa de las observaciones"
+
+#~ msgid "Update Observation"
+#~ msgstr "Actualiza"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Picture"
+#~ msgstr "Fotografía"
+
+#~ msgid "Beach List"
+#~ msgstr "Lista de playas"
+
+#~ msgid "Route List"
+#~ msgstr "Lista de rutas"
+
+#~ msgid "Welcome to Jellyfish observations application"
+#~ msgstr "Bienvenido/a a la aplicación de observación de medusas"
+
+#~ msgid "Beach opening"
+#~ msgstr "Apertura de playa"
+
+#~ msgid "Midday - 14h"
+#~ msgstr "Mediodía (14h)"
+
+#~ msgid "Beach closing"
+#~ msgstr "Cierre de la playa"
+
+#~ msgid "5 or less"
+#~ msgstr "5 o menos"
+
+#~ msgid "30 to 60"
+#~ msgstr "30 a 60"
+
+#~ msgid "date observed"
+#~ msgstr "fecha observación"
