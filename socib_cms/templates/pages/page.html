@@ -11,6 +11,7 @@
 {{ page.title }}
 {% endblock %}
 {% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
+{% block bodyclass %}{{ page.css_class }}{% endblock bodyclass%}
 
 {% block breadscrumbs %}
 {% include '_breadcumb.html' %}
