@@ -85,7 +85,7 @@ class News(models.Model, ClonableMixin):
         if not self.id:
             self.created_by = user
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title)[0:99]
         return super(News, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
