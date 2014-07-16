@@ -19,6 +19,7 @@ class NewsAdmin(AuditModelAdmin, TranslationAdmin):
     date_hierarchy = 'publish_date'
     list_display = ('title', 'category', 'publish_date', 'is_draft')
     list_filter = ['category']
+    search_fields = ['title']
     actions = ['make_published', 'clone']
 
     def clone(self, request, queryset):

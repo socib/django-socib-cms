@@ -17,6 +17,7 @@ class PageForm(FlatpageForm):
 class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
     form = PageForm
     formfield_overrides = {TextField: {'widget': CKEditorWidget(config_name='default')}, }
+    search_fields = ['title']
     filter_horizontal = ('related', 'groups',)
     list_display = ('url', 'title', 'order', 'group_list')
     list_filter = ['parent']
