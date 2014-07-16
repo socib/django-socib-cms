@@ -39,7 +39,7 @@
   </div>
   <div class="col-md-9 col-sm-8 col-xs-12">
     <div class="page-content">
-      {{ page.content|safe }}
+      {% block page_content %}{{ page.content|safe }}{% endblock %}
     </div>
 
     {% if page.list_children %}

@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from filer.fields.image import FilerImageField
+from filer.fields.file import FilerFileField
 from taggit.managers import TaggableManager
 from datetime import date
 from socib_cms.utils import ClonableMixin
@@ -52,6 +54,8 @@ class News(models.Model, ClonableMixin):
     related = models.ManyToManyField('self', verbose_name=_('related news'),
                                      blank=True, null=True)
     picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True)
+    attachment = FilerFileField(verbose_name=_('attachment'), null=True, blank=True,
+                                related_name="news_attachment")
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
     tags = TaggableManager(blank=True)
@@ -80,6 +84,8 @@ class News(models.Model, ClonableMixin):
         self.updated_by = user
         if not self.id:
             self.created_by = user
+        if not self.slug:
+            self.slug = slugify(self.title)
         return super(News, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
