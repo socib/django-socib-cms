@@ -53,9 +53,10 @@ class News(models.Model, ClonableMixin):
     slug = models.CharField(_('slug'), max_length=100)
     related = models.ManyToManyField('self', verbose_name=_('related news'),
                                      blank=True, null=True)
-    picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True)
+    picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
+                              on_delete=models.SET_NULL)
     attachment = FilerFileField(verbose_name=_('attachment'), null=True, blank=True,
-                                related_name="news_attachment")
+                                related_name="news_attachment", on_delete=models.SET_NULL)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
     tags = TaggableManager(blank=True)

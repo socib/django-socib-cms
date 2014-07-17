@@ -22,7 +22,8 @@ class Page(MPTTModel, FlatPage):
     list_children = models.BooleanField(
         _('list children pages inside this page content'),
         default=False)
-    picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True)
+    picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
+                              on_delete=models.SET_NULL)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
 
