@@ -26,6 +26,7 @@ class Page(MPTTModel, FlatPage):
                               on_delete=models.SET_NULL)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
+    old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)
 
     tree = TreeManager()
 

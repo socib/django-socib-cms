@@ -31,7 +31,8 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
             'classes': ('collapse',),
             'fields': ('related', 'enable_comments', 'is_container',
                        'list_children', 'hide', 'css_class',
-                       'registration_required', 'groups', 'template_name')
+                       'registration_required', 'groups', 'template_name',
+                       'old_url')
         }),
     )
     actions = ['create_child']
