@@ -52,7 +52,10 @@ class Page(MPTTModel, FlatPage):
         if self.is_root_node():
             return self
         else:
-            return self.parent.get_ancestors(include_self=True)[1]
+            if self.is_leaf_node_or_hidden_children():
+                return self.parent
+            else:
+                return self
 
     def is_leaf_node_or_hidden_children(self):
         """
