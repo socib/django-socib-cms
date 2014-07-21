@@ -47,6 +47,13 @@ class Page(MPTTModel, FlatPage):
         else:
             return self.get_ancestors(include_self=True)[1]
 
+    @property
+    def section(self):
+        if self.is_root_node():
+            return self
+        else:
+            return self.parent.get_ancestors(include_self=True)[1]
+
     def is_leaf_node_or_hidden_children(self):
         """
         Returns ``True`` if this model instance is a leaf node (it has no

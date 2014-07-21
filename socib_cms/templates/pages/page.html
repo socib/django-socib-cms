@@ -20,12 +20,13 @@
 {% block content %}
 <div class="row">
   <div class="col-md-3 col-sm-4 col-xs-12">
+      {% block pagemenu %}
       <ul class="menu-list">
-      {% recursetree page.sector.get_descendants %}
+      {% recursetree page.section.get_descendants %}
         {% if not node.registration_required or user.is_authenticated %}
           {% if not node.hide %}
             <li {% if node == page %}class="active"{% endif %}>
-              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title|truncatechars:60 }}</a>
+              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu|truncatechars:60 }}</a>
             {% if not node.is_leaf_node %}
               <ul class="menu-list">
                   {{ children }}
@@ -36,6 +37,7 @@
         {% endif %}
       {% endrecursetree %}
       </ul>
+      {% endblock %}
   </div>
   <div class="col-md-9 col-sm-8 col-xs-12">
     <div class="page-content">
@@ -57,7 +59,7 @@
             {% endif %}
             </div>
             <div class="panel-body">
-              <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title }}</a></p>
+              <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
               <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
             </div>
           </div>
