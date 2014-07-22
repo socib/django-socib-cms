@@ -46,7 +46,7 @@
 
     {% if page.list_children %}
       <div class="row list-children-pages">
-      {% recursetree page.children %}
+      {% for node in page.get_children %}
         {% if not node.registration_required or user.is_authenticated %}
           {% if not node.hide %}
         <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
@@ -66,7 +66,9 @@
         </div>
           {% endif %}
         {% endif %}
-      {% endrecursetree %}
+        {% cycle '' '' '<div class="clearfix visible-md visible-lg"></div>' %}
+        {% cycle '' '<div class="clearfix visible-sm"></div>' %}
+      {% endfor %}
       </div>
     {% endif %}
   </div>
