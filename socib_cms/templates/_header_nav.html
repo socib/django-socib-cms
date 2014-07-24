@@ -1,6 +1,5 @@
 {% load mptt_tags %}
 {% load i18n %}
-{% load localeurl_tags %}
 {% load socib_extras %}
 
     <!-- Fixed navbar -->
@@ -22,8 +21,8 @@
               {% recursetree pages %}
                 {% if not node.registration_required or user.is_authenticated %}
                   {% if not node.hide %}
-                  <li class="{{ node.css_class }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}dropdown{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE  %}active{% endif %}">
-                    <a href="{% if node.is_container %}#{% else %}{{ node.url|chlocale:LANGUAGE_CODE }}{% endif %}">
+                  <li class="{{ node.css_class }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}dropdown{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE %}active{% endif %}">
+                    <a href="{% if node.is_container %}#{% else %}{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}{% endif %}">
                       {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}<b class="caret"></b>{% endif %}</a>
                     {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}
                     <ul class="dropdown-menu">
@@ -57,7 +56,7 @@
                 {% endif %}
 
                   <li class="dropdown change-lang">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">{% trans 'Change language' %} <b class="caret"></b></a>
+                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">{% trans 'Language' %} <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                           {% for lang in LANGUAGES %}
                             {% ifequal lang.0 LANGUAGE_CODE %}

@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load mptt_tags %}
 {% load thumbnail %}
-{% load localeurl_tags %}
+{% load socib_extras %}
 
 {% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
 
@@ -26,7 +26,7 @@
         {% if not node.registration_required or user.is_authenticated %}
           {% if not node.hide %}
             <li {% if node == page %}class="active"{% endif %}>
-              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu|truncatechars:60 }}</a>
+              <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu|truncatechars:60 }}</a>
             {% if not node.is_leaf_node %}
               <ul class="menu-list">
                   {{ children }}
@@ -53,13 +53,13 @@
           <div class="panel panel-default">
             <div class="panel-thumbnail">
             {% if node.picture %}
-              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
+              <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
             {% else %}
-              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
+              <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
             {% endif %}
             </div>
             <div class="panel-body">
-              <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
+              <p class="lead"><a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
               <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 {% load mptt_tags %}
 {% load i18n %}
-{% load localeurl_tags %}
+{% load socib_extras %}
 
 <ol class="breadcrumb">
   {% for node in page.get_ancestors %}
@@ -8,7 +8,7 @@
     {% if node.container %}
     <a><span>{{ node.title }}</span></a>
     {% else %}
-    <a href="{{ node.url|chlocale:LANGUAGE_CODE  }}"><span>{{ node.title }}</span></a>
+    <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title }}</span></a>
     {% endif %}
   </li>
   {% endfor %}

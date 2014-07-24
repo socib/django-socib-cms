@@ -45,9 +45,9 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
             'fields': ('parent', 'url', 'title', 'title_menu', 'order', 'picture',
                        'introduction', 'content', 'sites')
         }),
-        ('Advanced options', {
+        (_('Advanced options'), {
             'classes': ('collapse',),
-            'fields': ('related', 'enable_comments', 'is_container',
+            'fields': ('redirect_link', 'related', 'enable_comments', 'is_container',
                        'list_children', 'hide', 'css_class',
                        'registration_required', 'groups', 'template_name',
                        'old_url')

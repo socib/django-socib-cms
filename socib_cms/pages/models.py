@@ -27,6 +27,8 @@ class Page(MPTTModel, FlatPage):
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
     old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)
+    redirect_link = models.CharField(_('redirect link'), max_length=300,
+                                     blank=True, null=True)
 
     tree = TreeManager()
 
@@ -56,6 +58,11 @@ class Page(MPTTModel, FlatPage):
                 return self.parent
             else:
                 return self
+
+    def get_absolute_url(self):
+        if self.redirect_link:
+            return self.redirect_link
+        return self.url
 
     def is_leaf_node_or_hidden_children(self):
         """
