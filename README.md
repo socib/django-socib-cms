@@ -11,6 +11,7 @@ Quick start
 
 1. Add "socib_cms", "socib_cms.pages", "socib_cms.news" and current required apps to your INSTALLED_APPS setting like this::
 
+```
     INSTALLED_APPS = (
         ...
         'socib_cms',
@@ -40,9 +41,11 @@ Quick start
         # optional, but recommended
         'south',
     )
+```
 
 2. Configure mandatory settings for the apps::
 
+```
     SOUTH_MIGRATION_MODULES = {
         'easy_thumbnails': 'easy_thumbnails.south_migrations',
         'taggit': 'taggit.south_migrations',
@@ -103,10 +106,13 @@ Quick start
         'ca': ('es',),
         'es': ('ca',),
     }
+```
 
 3. Include socib_cms URLconf in your project urls.py like this::
 
+```
     url(r'^', include('socib_cms.urls')),
+```
 
 4. Run `python manage.py migrate` to create the models (pages and news).
 
