@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.db.models import TextField
 from ckeditor_filer.widgets import CKEditorWidget
+from filer.fields.folder import FilerFolderField, AdminFolderFormField
 from mptt.admin import MPTTModelAdmin
 from modeltranslation.admin import TranslationAdmin
 import models
@@ -33,8 +34,9 @@ class PageFilter(SimpleListFilter):
 
 class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
     form = PageForm
-    formfield_overrides = {TextField: {'widget': CKEditorWidget(
-        config_name='default')}, }
+    formfield_overrides = {
+        TextField: {'widget': CKEditorWidget(config_name='default')},
+        FilerFolderField: {'form_class': AdminFolderFormField}}
     search_fields = ['title']
     filter_horizontal = ('related', 'groups',)
     list_display = ('url', 'title', 'order', 'group_list')
@@ -43,7 +45,7 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
     fieldsets = (
         (None, {
             'fields': ('parent', 'url', 'title', 'title_menu', 'order', 'picture',
-                       'introduction', 'content', 'sites')
+                       'album', 'introduction', 'content', 'sites')
         }),
         (_('Advanced options'), {
             'classes': ('collapse',),

@@ -1,6 +1,7 @@
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 from filer.fields.image import FilerImageField
+from filer.fields.folder import FilerFolderField
 from django.contrib.auth.models import Group
 from django.db import models
 from django.contrib.flatpages.models import FlatPage
@@ -24,6 +25,8 @@ class Page(MPTTModel, FlatPage):
         default=False)
     picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
                               on_delete=models.SET_NULL)
+    album = FilerFolderField(verbose_name=_('album'), null=True, blank=True,
+                             on_delete=models.SET_NULL)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
     old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)

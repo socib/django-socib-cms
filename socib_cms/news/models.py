@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
+from filer.fields.folder import FilerFolderField
 from taggit.managers import TaggableManager
 from datetime import date
 from socib_cms.utils import ClonableMixin
@@ -57,6 +58,8 @@ class News(models.Model, ClonableMixin):
                               on_delete=models.SET_NULL)
     attachment = FilerFileField(verbose_name=_('attachment'), null=True, blank=True,
                                 related_name="news_attachment", on_delete=models.SET_NULL)
+    album = FilerFolderField(verbose_name=_('album'), null=True, blank=True,
+                             on_delete=models.SET_NULL)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
     tags = TaggableManager(blank=True)
