@@ -27,9 +27,9 @@
   </head>
 
   <body class="{% block bodyclass %}normal{% endblock bodyclass%}">
-    <div id="header-img">
-    </div>
+    <div id="header">
     {% block navigation %}{% include '_header_nav.html' %}{% endblock navigation %}
+    </div>
     {% block maincontent %}
     <div class="{% block mainclass %}container{% endblock mainclass%}" id="main">
       <div class="row">
@@ -77,6 +77,24 @@
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script type="text/javascript">
       $(function() {
+        if ($(window).width() < 768)
+          $('.dropdown-toggle').attr('data-toggle','dropdown');
+        $(window).resize(function(event) {
+          if ($(window).width() < 768){
+            $('.dropdown-toggle').attr('data-toggle','dropdown');
+          }else{
+            $('.dropdown-toggle').removeAttr('data-toggle');
+          }
+        });
+        // Hide some elements on collapse
+        $('.navbar-collapse').on('show.bs.collapse', function(){
+          $('.map-wrapper').hide();
+          $('#main').hide();
+        });
+        $('.navbar-collapse').on('hidden.bs.collapse', function(){
+          $('.map-wrapper').show();
+          $('#main').show();
+        });
         // Menu active from submenu:
         $('.navbar li.active').each(function(){
           var parent = $(this).parent().parent();
@@ -85,7 +103,7 @@
           }
         });
         // header
-        var height = $("#header-img").height();
+        var height = $("#header").height();
         $(document).scroll(function(){
           if($(document).scrollTop() > height) {
             $('#subnav').addClass('fixed');
