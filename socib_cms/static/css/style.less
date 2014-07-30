@@ -131,9 +131,15 @@ ul.menu-list {
   background-color: #f5f5f5;
   li{
     border-bottom: 2px solid #FFFFFF;
-    padding: 10px 0;
+    padding: 0;
+    padding-left: 4px;
     a {
-      padding-left: 10px;
+      display: block;
+      padding: 10px 10px;
+    }
+    &:hover{
+      padding-left: 0px;
+      border-left: 4px solid @brand-secondary;
     }
     &.active{
       background-color: @brand-secondary;
