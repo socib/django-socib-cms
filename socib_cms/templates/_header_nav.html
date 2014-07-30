@@ -21,11 +21,11 @@
               {% recursetree pages %}
                 {% if not node.registration_required or user.is_authenticated %}
                   {% if not node.hide %}
-                  <li class="{{ node.css_class }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}dropdown{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE  %}active{% endif %}">
+                  <li class="{{ node.css_class }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}dropdown{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE  %}active{% endif %}">
                     <a href="{% if node.is_container %}#{% else %}{{ node.url|chlocale:LANGUAGE_CODE }}{% endif %}"
-                       {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %} class="dropdown-toggle" {% endif %} >
-                      {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}<b class="caret"></b>{% endif %}</a>
-                    {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}
+                       {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %} class="dropdown-toggle" {% endif %} >
+                      {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}<b class="caret"></b>{% endif %}</a>
+                    {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}
                     <ul class="dropdown-menu">
                         {{ children }}
                     </ul>

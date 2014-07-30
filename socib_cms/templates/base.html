@@ -86,6 +86,14 @@
             $('.dropdown-toggle').removeAttr('data-toggle');
           }
         });
+        // Fix dropdown-menu click on second level menus.
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+          // opening the one you clicked on
+          $(this).parent().addClass('open');
+        });
         // Hide some elements on collapse
         $('.navbar-collapse').on('show.bs.collapse', function(){
           $('.map-wrapper').hide();
