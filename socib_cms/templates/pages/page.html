@@ -19,7 +19,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-3 col-sm-4 col-xs-12">
+  <div class="{% block page_sidebar_cols %}col-md-3 col-sm-4 col-xs-12{% endblock %}">
       {% block pagemenu %}
       <ul class="menu-list">
       {% recursetree page.section.get_descendants %}
@@ -39,7 +39,7 @@
       </ul>
       {% endblock %}
   </div>
-  <div class="col-md-9 col-sm-8 col-xs-12">
+  <div class="{% block page_main_cols %}col-md-9 col-sm-8 col-xs-12{% endblock%}">
     {% if page.album %}
     <div class="page-album">
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
