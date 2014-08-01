@@ -23,6 +23,7 @@ class NewsAdmin(AuditModelAdmin, TranslationAdmin):
     search_fields = ['title']
     actions = ['make_published', 'clone']
     formfield_overrides = {
+        TextField: {'widget': CKEditorWidget(config_name='default')},
         FilerFolderField: {'form_class': AdminFolderFormField}}
 
     def clone(self, request, queryset):
