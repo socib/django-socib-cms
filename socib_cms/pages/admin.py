@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.db.models import TextField
 from ckeditor_filer.widgets import CKEditorWidget
+from django_ace import AceWidget
 from filer.fields.folder import FilerFolderField, AdminFolderFormField
 from mptt.admin import MPTTModelAdmin
 from modeltranslation.admin import TranslationAdmin
@@ -15,6 +16,10 @@ class PageForm(FlatpageForm):
 
     class Meta:
         model = models.Page
+        widgets = {
+            'js_code': AceWidget(mode='javascript', theme='dawn',
+                                 width="800px", height="400px")
+        }
 
 
 class PageFilter(SimpleListFilter):
@@ -52,7 +57,7 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
             'fields': ('redirect_link', 'related', 'enable_comments', 'is_container',
                        'list_children', 'hide', 'css_class',
                        'registration_required', 'groups', 'template_name',
-                       'old_url')
+                       'old_url', 'js_code')
         }),
     )
     actions = ['create_child']

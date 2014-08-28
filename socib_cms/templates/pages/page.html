@@ -106,3 +106,11 @@
 </div>
 {% endblock %}
 
+{% block page_js %}
+  {% if page.js_code %}
+  <script type="text/javascript">
+    {{ page.js_code|safe }}
+  </script>
+  {% endif %}
+{% endblock page_js %}
+

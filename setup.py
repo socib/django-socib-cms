@@ -35,6 +35,7 @@ setup(
         'django-tables2',
         'django_compressor',
         'ckeditor_filer',
+        'django-ace'
     ),
     dependency_links=[
         'git+https://github.com/bielfrontera/django-ckeditor-filer.git#egg=ckeditor_filer-1.0'

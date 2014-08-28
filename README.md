@@ -32,6 +32,7 @@ Quick start
         'admin_shortcuts',
         'djangocms_admin_style',
         'taggit',
+        'django_ace',
         'django.contrib.sites',
         'django.contrib.messages',
         'django.contrib.staticfiles',
