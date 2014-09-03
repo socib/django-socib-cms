@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     license='MIT License',
     install_requires=(
-        'Django>=1.4',
+        'Django==1.6',
         'Pillow',
         'easy-thumbnails>=1.0',
         'django-mptt',
