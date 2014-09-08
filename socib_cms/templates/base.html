@@ -87,7 +87,7 @@
           }
         });
         // Fix dropdown-menu click on second level menus.
-        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+        $('ul.dropdown-menu [data-toggle=dropdown]').click(function(event) {
           event.preventDefault();
           event.stopPropagation();
           $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
@@ -119,6 +119,15 @@
           else {
             $('#subnav').removeClass('fixed');
           }
+        });
+        // Change language. Set selected locale in session
+        $('a.change-lang').click(function(event) {
+          var locale = $(this).data('locale');
+          $.post( "{% url 'localeurl_change_locale' %}",
+            {
+              locale: locale,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            });
         });
       });
     </script>

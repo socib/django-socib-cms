@@ -61,9 +61,9 @@
                       <ul class="dropdown-menu">
                           {% for lang in LANGUAGES %}
                             {% ifequal lang.0 LANGUAGE_CODE %}
-                                <li class="active"><a href="#">{{ lang.1 }}</a></li>
+                                <li class="active"><a href="#" class="change-lang" data-lang="{{ lang.0 }}">{{ lang.1 }}</a></li>
                             {% else %}
-                                <li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+                                <li><a href="{{ request.path|chlocale:lang.0 }}" class="change-lang" data-locale="{{ lang.0 }}">{{ lang.1 }}</a></li>
                             {% endifequal %}
                           {% endfor %}
                       </ul>
