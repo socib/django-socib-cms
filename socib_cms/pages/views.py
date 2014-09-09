@@ -58,7 +58,7 @@ class GenericPageView(DetailView, BasePageView):
         if queryset is None:
             queryset = self.get_queryset()
         # Get page by url
-        url = self.kwargs.get('url', None)
+        url = self.kwargs.get('url', '')
         queryset = queryset.filter(url='/' + url)
         try:
             obj = queryset.get()

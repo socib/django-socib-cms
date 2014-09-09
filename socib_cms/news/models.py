@@ -39,6 +39,9 @@ class NewsManager(models.Manager):
     def latest(self, num_records, *args, **kwargs):
         return self.get_query_set().published(*args, **kwargs)[:num_records]
 
+    def latest10(self, *args, **kwargs):
+        return self.latest(10, *args, **kwargs)
+
 
 class News(models.Model, ClonableMixin):
     category = models.ForeignKey(NewsCategory, on_delete=models.PROTECT,

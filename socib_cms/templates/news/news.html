@@ -39,7 +39,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-9 col-sm-8">
+  <div class="col-md-8 col-sm-12">
     {% if news.album %}
     <div class="news-album">
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -75,7 +75,7 @@
       {{ news.content|safe }}
     </div>
   </div>
-  <div class="col-md-3 col-sm-4">
+  <div class="col-md-4 col-sm-12">
     {% if news.picture %}
       <img src="{% thumbnail news.picture 250x0 crop %}" class="img-responsive">
     {% endif %}
