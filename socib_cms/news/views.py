@@ -1,8 +1,10 @@
 # coding: utf-8
+from datetime import datetime, time
 from django.views.generic.detail import DetailView
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib.syndication.views import Feed
 from localeurl.models import django_reverse as reverse
 from socib_cms.pages.views import BasePageView
 from socib_cms.pages.models import Page
@@ -74,3 +76,32 @@ class NewsDetailView(DetailView, BasePageView):
         context = super(NewsDetailView, self).get_context_data(**kwargs)
         context['page'] = self.get_page()
         return context
+
+
+class NewsFeed(Feed):
+    title = "News"
+    link = "/news/"
+    description = "description"
+
+    def get_object(self, *args, **kwargs):
+        if 'slug' in kwargs:
+            self.category = get_object_or_404(models.NewsCategory, slug=kwargs['slug'])
+        else:
+            self.category = None
+
+    def items(self):
+        if self.category:
+            return self.category.news_set.latest(10)
+        return models.News.objects.latest(10)
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.summary
+
+    def item_link(self, item):
+        return item.get_absolute_url()
+
+    def item_pubdate(self, item):
+        return datetime.combine(item.publish_date, time())

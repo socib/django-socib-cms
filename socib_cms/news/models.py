@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, truncatewords, striptags
 from django.utils.translation import ugettext_lazy as _
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
@@ -36,8 +36,8 @@ class NewsManager(models.Manager):
     def published(self, *args, **kwargs):
         return self.get_query_set().published(*args, **kwargs)
 
-    def latest10(self, *args, **kwargs):
-        return self.get_query_set().published(*args, **kwargs)[:10]
+    def latest(self, num_records, *args, **kwargs):
+        return self.get_query_set().published(*args, **kwargs)[:num_records]
 
 
 class News(models.Model, ClonableMixin):
@@ -97,3 +97,9 @@ class News(models.Model, ClonableMixin):
         if self.redirect_link:
             return self.redirect_link
         return reverse('news_detail', args=[self.category.slug, self.slug])
+
+    @property
+    def summary(self):
+        if self.introduction:
+            return self.introduction
+        return truncatewords(striptags(self.content), 50)
