@@ -34,13 +34,13 @@ setup(
         'django-crispy-forms',
         'django-tables2',
         'django_compressor',
-        'ckeditor_filer',
+        # 'ckeditor_filer',
         'django-ace',
         'django-genericadmin==0.6.1'
     ),
-    dependency_links=[
-        'git+https://github.com/bielfrontera/django-ckeditor-filer.git#egg=ckeditor_filer-1.0'
-    ],
+    # dependency_links=[
+    #     'git+https://github.com/bielfrontera/django-ckeditor-filer.git#egg=ckeditor_filer-1.0'
+    # ],
     classifiers=[
         'Development Status :: 1 - Beta',
         'Environment :: Web Environment',
