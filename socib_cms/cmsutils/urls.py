@@ -8,7 +8,7 @@ urlpatterns = patterns(
         views.proxy_to,
         {'target_url': 'file:///data/current/'}),
     # catch all
-    url(r'^(?P<path>.*)$',
+    url(r'^services/(?P<path>.*)$',
         views.proxy_to,
         {'target_url': settings.SOCIB_DATADISCOVERY}),
 )
