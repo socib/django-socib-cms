@@ -11,9 +11,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body > .container {
+body > .container{
   padding: 10px 15px 20px 15px;
 }
+
+body > .container-fluid {
+  padding: 10px 0 20px 0;
+}
+
 .container .text-muted {
   margin: 20px 0;
 }
@@ -37,6 +42,7 @@ body > .container {
 }
 
 .page-content{
+  text-align: justify;
   img{
     max-width: 100%;
     height: auto;
@@ -128,14 +134,15 @@ ul.menu-list {
   text-align: left;
   padding: 0;
   border-top: 2px solid;
-  background-color: #f5f5f5;
   li{
     border-bottom: 2px solid #FFFFFF;
     padding: 0;
+    background-color: @gray-lighter;
     padding-left: 4px;
     a {
       display: block;
       padding: 10px 10px;
+      text-transform: capitalize;
     }
     &:hover{
       padding-left: 0px;
@@ -152,6 +159,23 @@ ul.menu-list {
       }
       li a {
         color: #444444;
+      }
+    }
+    &.section{
+      background-color: #FFF;
+      color: #EEE;
+      border-bottom: 1px solid #333;
+      margin-bottom: 3px;
+      a {
+        color: #444;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        text-align: center;
+      }
+      &:hover{
+        border-left: none;
+        padding-left: 4px;
+        background-color: @brand-secondary;
       }
     }
   }
@@ -173,6 +197,42 @@ ul.menu-list {
         }
       }
     }
+  }
+}
+
+.container .container{
+  width: 100%;
+}
+
+/* section pages */
+.page-body section{
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+
+.page-body section:first-child{
+  padding-top: 0;
+  .section-heading{
+    h2 {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+}
+.page-body section:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+.page-body section:nth-child(even) {
+  background-color: @gray-lighter;
+}
+
+.section-heading{
+  h2 {
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 

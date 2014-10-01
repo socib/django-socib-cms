@@ -55,7 +55,8 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
         (_('Advanced options'), {
             'classes': ('collapse',),
             'fields': ('redirect_link', 'related', 'enable_comments', 'is_container',
-                       'list_children', 'hide', 'css_class',
+                       'list_children', 'include_children', 'hide', 'css_class',
+                       'css_container_style',
                        'registration_required', 'groups', 'template_name',
                        'old_url', 'js_code')
         }),

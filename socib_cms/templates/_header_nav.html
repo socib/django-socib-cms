@@ -25,11 +25,25 @@
                     <a href="{% if node.is_container %}#{% else %}{{ node.url|chlocale:LANGUAGE_CODE }}{% endif %}"
                        {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %} class="dropdown-toggle" {% endif %} >
                       {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}<b class="caret"></b>{% endif %}</a>
-                    {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}
+                    {% if not node.is_leaf_node_or_hidden_children and not node.include_children and node.get_level < 3 %}
                     <ul class="dropdown-menu">
                         {{ children }}
                     </ul>
                     {% endif %}
+                    {% if node.include_children and node.list_children and node.get_level < 3 %}
+                    <ul class="dropdown-menu">
+                      {% for child in node.get_children %}
+                        {% if not child.registration_required or user.is_authenticated %}
+                          {% if not child.hide %}
+                          <li class="{{ child.css_class }}">
+                            <a href="{{ node.url|chlocale:LANGUAGE_CODE }}#{{ child.title|slugify }}">{{ child.title_menu }}</a>
+                          </li>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+
                   {% endif %}
                 </li>
                 {% endif %}

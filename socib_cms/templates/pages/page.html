@@ -8,7 +8,6 @@
 {% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
 
 {% block title %}
-{{ page.title }}
 {% endblock %}
 {% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
 {% block bodyclass %}{{ page.css_class }}{% endblock bodyclass%}
@@ -22,16 +21,12 @@
   <div class="{% block page_sidebar_cols %}col-md-3 col-sm-4 col-xs-12{% endblock %}">
       {% block pagemenu %}
       <ul class="menu-list">
+        <li class="section"><a href="{{ page.section.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ page.section.title_menu|truncatechars:60 }}</a></li>
       {% recursetree page.section.get_descendants %}
         {% if not node.registration_required or user.is_authenticated %}
           {% if not node.hide %}
             <li {% if node == page %}class="active"{% endif %}>
               <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu|truncatechars:60 }}</a>
-            {% if not node.is_leaf_node %}
-              <ul class="menu-list">
-                  {{ children }}
-              </ul>
-            {% endif %}
             </li>
           {% endif %}
         {% endif %}
@@ -40,68 +35,36 @@
       {% endblock %}
   </div>
   <div class="{% block page_main_cols %}col-md-9 col-sm-8 col-xs-12{% endblock%}">
-    {% if page.album %}
-    <div class="page-album">
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-        {% for image in page.album.files.all %}
-          {% if image.height > 0 %}
-            <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
-          {% endif %}
-        {% endfor %}
-        </ol>
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          {% for image in page.album.files.all %}
-            {% if image.height > 0 %}
-              <div class="item {% if forloop.counter0 == 0 %}active{% endif %}">
-                <img src="{% thumbnail image 800x500 upscale crop subject_location=image.subject_location  %}" class="img-responsive">
+    {% block page_content %}
+      {% include 'pages/section-default.html' %}
+      {% if page.list_children %}
+        <div class="row list-children-pages">
+        {% for node in page.get_children %}
+          {% if not node.registration_required or user.is_authenticated %}
+            {% if not node.hide %}
+          <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
+            <div class="panel panel-default">
+              <div class="panel-thumbnail">
+              {% if node.picture %}
+                <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
+              {% else %}
+                <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
+              {% endif %}
               </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </div>
-    </div>
-    {% endif %}
-    <div class="page-content">
-      {% block page_content %}{{ page.content|safe }}{% endblock %}
-    </div>
-
-    {% if page.list_children %}
-      <div class="row list-children-pages">
-      {% for node in page.get_children %}
-        {% if not node.registration_required or user.is_authenticated %}
-          {% if not node.hide %}
-        <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
-          <div class="panel panel-default">
-            <div class="panel-thumbnail">
-            {% if node.picture %}
-              <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
-            {% else %}
-              <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
-            {% endif %}
-            </div>
-            <div class="panel-body">
-              <p class="lead"><a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
-              <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
+              <div class="panel-body">
+                <p class="lead"><a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
+                <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
+              </div>
             </div>
           </div>
-        </div>
+            {% endif %}
           {% endif %}
-        {% endif %}
-        {% cycle '' '' '<div class="clearfix visible-md visible-lg"></div>' %}
-        {% cycle '' '<div class="clearfix visible-sm"></div>' %}
-      {% endfor %}
-      </div>
-    {% endif %}
+          {% cycle '' '' '<div class="clearfix visible-md visible-lg"></div>' %}
+          {% cycle '' '<div class="clearfix visible-sm"></div>' %}
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endblock %}
   </div>
 </div>
 {% endblock %}

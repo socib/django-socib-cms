@@ -1,0 +1,64 @@
+{% extends "pages/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+{% load socib_extras %}
+
+{% block title_head %}{{ block.super }}: {{ page.title }}{% endblock %}
+
+{% block title %}
+{% endblock %}
+{% block mainclass %}container-fluid {{ page.css_class }}{% endblock mainclass%}
+{% block bodyclass %}{{ page.css_class }}{% endblock bodyclass%}
+
+{% block breadscrumbs %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% include '_breadcumb.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if page.template_name %}
+    {% include page.template_name%}
+{% else %}
+    {% include 'pages/section-default.html' %}
+{% endif %}
+
+{% for node in page.get_children %}
+  {% if not node.registration_required or user.is_authenticated %}
+    {% if not node.hide %}
+      {% if node.template_name %}
+          {% include node.template_name with page=node %}
+      {% else %}
+          {% include 'pages/section-default.html' with page=node %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block page_js %}
+  {% if page.js_code %}
+    <script type="text/javascript">
+      {{ page.js_code|safe }}
+    </script>
+  {% endif %}
+  {% for node in page.get_children %}
+    {% if not node.registration_required or user.is_authenticated %}
+      {% if not node.hide %}
+        {% if node.js_code %}
+      <script type="text/javascript">
+        {{ node.js_code|safe }}
+      </script>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endblock page_js %}
+

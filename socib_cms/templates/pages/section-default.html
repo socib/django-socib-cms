@@ -1,0 +1,65 @@
+{% load i18n %}
+{% load thumbnail %}
+
+<section id="{{ page.title|slugify }}" class="{{ page.css_class}}" style="{{ page.css_container_style }}">
+  <div class="section-heading text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2>{{ page.title }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container">
+    {% if page.album %}
+      {% block page_album %}
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="page-album">
+            <div id="carousel-{{ page.title|slugify }}" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+              {% for image in page.album.files.all %}
+                {% if image.height > 0 %}
+                  <li data-target="#carousel-{{ page.title|slugify }}" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+                {% endif %}
+              {% endfor %}
+              </ol>
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                {% for image in page.album.files.all %}
+                  {% if image.height > 0 %}
+                    <div class="item {% if forloop.counter0 == 0 %}active{% endif %}">
+                      <img src="{% thumbnail image 800x500 upscale crop subject_location=image.subject_location  %}" class="img-responsive">
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <!-- Controls -->
+              <a class="left carousel-control" href="#carousel-{{ page.title|slugify }}" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-{{ page.title|slugify }}" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+    {% endif %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-content">
+          {{ page.content|safe }}
+          </div>
+          {% if user.is_staff %}
+            <a class="pull-right btn btn-primary btn-xs" href="{% url 'admin:pages_page_change' page.pk %}">{% trans 'Modify this page' %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

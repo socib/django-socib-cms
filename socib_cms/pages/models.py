@@ -23,6 +23,9 @@ class Page(MPTTModel, FlatPage):
     list_children = models.BooleanField(
         _('list children pages inside this page content'),
         default=False)
+    include_children = models.BooleanField(
+        _('children pages content is shown in sections of this page'),
+        default=False)
     picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
                               on_delete=models.SET_NULL)
     album = FilerFolderField(verbose_name=_('album'), null=True, blank=True,
@@ -30,6 +33,8 @@ class Page(MPTTModel, FlatPage):
     js_code = models.TextField(_('javascript code'), blank=True)
     css_class = models.CharField(_('CSS class'), max_length=50,
                                  null=True, blank=True)
+    css_container_style = models.CharField(_('CSS styles'), max_length=300,
+                                           null=True, blank=True)
     old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)
     redirect_link = models.CharField(_('redirect link'), max_length=300,
                                      blank=True, null=True)
@@ -73,6 +78,8 @@ class Page(MPTTModel, FlatPage):
         Returns ``True`` if this model instance is a leaf node (it has no
         children, removing hide children), ``False`` otherwise.
         """
+        if self.include_children and not self.list_children:
+            return True
         if not hasattr(self, 'unhidden_children_count'):
             self.unhidden_children_count = self.get_children().filter(hide=False).count()
 

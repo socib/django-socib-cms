@@ -69,8 +69,9 @@ class GenericPageView(DetailView, BasePageView):
     def get_template_names(self):
         if self.object.template_name:
             return [self.object.template_name]
-        else:
-            return super(GenericPageView, self).get_template_names()
+        if self.object.include_children:
+            return ['pages/page-sections.html']
+        return super(GenericPageView, self).get_template_names()
 
     def get(self, *args, **kwargs):
         self.object = self.get_object()
