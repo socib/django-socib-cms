@@ -9,11 +9,22 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Page(MPTTModel, FlatPage):
+
+    PICTURE_LOCATION_CHOICES = (
+        ('header', _('Header')),
+        ('extra', _('Inside extra content')),
+        ('background', _('As background image')),
+        ('none', _('Do not show')),
+    )
+
     title_menu = models.CharField(_('Short title for menu'), max_length=50)
     order = models.IntegerField(_('order'), default=0)
     introduction = models.CharField(_('Introduction'), max_length=900,
-                                    blank=True, null=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+                                    blank=True, null=True,
+                                    help_text=_('This text will be used in lists. If empty, the system will use the first 20 words of content'))
+    extra_content = models.TextField(_('extra content'), blank=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children',
+                            verbose_name=_('parent'))
     related = models.ManyToManyField('self', verbose_name=_('related pages'),
                                      blank=True, null=True)
     groups = models.ManyToManyField(Group, verbose_name=_('user groups allowed'),
@@ -28,6 +39,11 @@ class Page(MPTTModel, FlatPage):
         default=False)
     picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
                               on_delete=models.SET_NULL)
+    picture_description = models.CharField(_('picture description'), max_length=900,
+                                           blank=True, null=True)
+    picture_location = models.CharField(_('picture location'), max_length=10,
+                                        choices=PICTURE_LOCATION_CHOICES,
+                                        default='extra')
     album = FilerFolderField(verbose_name=_('album'), null=True, blank=True,
                              on_delete=models.SET_NULL)
     js_code = models.TextField(_('javascript code'), blank=True)
@@ -38,6 +54,17 @@ class Page(MPTTModel, FlatPage):
     old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)
     redirect_link = models.CharField(_('redirect link'), max_length=300,
                                      blank=True, null=True)
+    show_section_menu = models.BooleanField(_('show section menu'), default=True)
+    content_template_name = models.CharField(
+        _('content template name'), max_length=70, blank=True,
+        help_text=_(
+            "Example: 'pages/content/intro.html'. If this isn't provided, "
+            "the system will use 'pages/content/default.html'."
+        ),
+    )
+    content_columns = models.IntegerField(_('content columns'), default=12)
+    extra_content_columns = models.IntegerField(_('extra content columns'), default=4)
+    float_extra_content = models.BooleanField(_('float extra content'), default=True)
 
     tree = TreeManager()
 
@@ -67,6 +94,13 @@ class Page(MPTTModel, FlatPage):
                 return self.parent
             else:
                 return self
+
+    @property
+    def get_content_template(self):
+        if self.content_template_name:
+            return self.content_template_name
+        else:
+            return 'pages/content/default.html'
 
     def get_absolute_url(self):
         if self.redirect_link:

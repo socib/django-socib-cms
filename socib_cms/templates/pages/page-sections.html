@@ -24,20 +24,12 @@
 
 {% block content %}
 
-{% if page.template_name %}
-    {% include page.template_name%}
-{% else %}
-    {% include 'pages/section-default.html' %}
-{% endif %}
+{% include page.get_content_template %}
 
 {% for node in page.get_children %}
   {% if not node.registration_required or user.is_authenticated %}
     {% if not node.hide %}
-      {% if node.template_name %}
-          {% include node.template_name with page=node %}
-      {% else %}
-          {% include 'pages/section-default.html' with page=node %}
-      {% endif %}
+      {% include node.get_content_template with page=node %}
     {% endif %}
   {% endif %}
 {% endfor %}

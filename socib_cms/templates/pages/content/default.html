@@ -1,12 +1,19 @@
 {% load i18n %}
 {% load thumbnail %}
 
-<section id="{{ page.title|slugify }}" class="{{ page.css_class}}" style="{{ page.css_container_style }}">
+<section id="{{ page.title|slugify }}" class="{{ page.css_class|default_if_none:""}}" style="{{ page.css_container_style|default_if_none:""}}{% if page.picture and page.picture_location == 'background' %}background-image: url('{{page.picture.url}}'); background-size: 100%; background-repeat: no-repeat; background-position: right bottom;;{% endif %}">
   <div class="section-heading text-center">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-md-12">
+          {% if page.picture and page.picture_location == 'header' %}
+            <div class="page-picture">
+              <img src="{{ page.picture.url }}" class="img-responsive"></a>
+              <h2>{{ page.title }}</h2>
+            </div>
+          {% else %}
           <h2>{{ page.title }}</h2>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -51,15 +58,21 @@
       {% endblock %}
     {% endif %}
       <div class="row">
-        <div class="col-md-12">
+        <div class="content-wrapper col-md-{{ page.content_columns }}">
+          {% if page.float_extra_content %}
+          {% include "pages/content/extra.html" %}
+          {% endif %}
           <div class="page-content">
           {{ page.content|safe }}
           </div>
-          {% if user.is_staff %}
-            <a class="pull-right btn btn-primary btn-xs" href="{% url 'admin:pages_page_change' page.pk %}">{% trans 'Modify this page' %}</a>
-          {% endif %}
         </div>
+        {% if not page.float_extra_content %}
+        {% include "pages/content/extra.html" %}
+        {% endif %}
       </div>
+      {% if user.is_staff %}
+        <a class="pull-right btn btn-primary btn-xs" href="{% url 'admin:pages_page_change' page.pk %}">{% trans 'Modify this page' %}</a>
+      {% endif %}
     </div>
   </div>
 </section>

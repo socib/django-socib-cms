@@ -4,6 +4,8 @@ from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.db.models import TextField
+from django.contrib.sites.models import Site
+from django.forms import Textarea, TextInput
 from ckeditor_filer.widgets import CKEditorWidget
 from django_ace import AceWidget
 from filer.fields.folder import FilerFolderField, AdminFolderFormField
@@ -48,20 +50,43 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
     list_filter = [PageFilter]
     list_editable = ('order',)
     fieldsets = (
-        (None, {
-            'fields': ('parent', 'url', 'title', 'title_menu', 'order', 'picture',
-                       'album', 'introduction', 'content', 'sites')
+        (_('Hierarchy'), {
+            'fields': ('parent', 'order', 'url')
+        }),
+        (_('Content'), {
+            'fields': ('title', 'title_menu', 'introduction', 'content',
+                       'extra_content', )
+        }),
+        (_('Pictures'), {
+            'fields': ('picture', 'picture_description', 'picture_location', 'album', )
+        }),
+        (_('Layout and design'), {
+            'fields': ('template_name', 'content_template_name', 'show_section_menu',
+                       'content_columns', 'extra_content_columns', 'float_extra_content',
+                       'list_children', 'include_children',
+                       'css_class', 'css_container_style', )
         }),
         (_('Advanced options'), {
             'classes': ('collapse',),
-            'fields': ('redirect_link', 'related', 'enable_comments', 'is_container',
-                       'list_children', 'include_children', 'hide', 'css_class',
-                       'css_container_style',
-                       'registration_required', 'groups', 'template_name',
+            'fields': ('sites', 'redirect_link', 'related', 'enable_comments',
+                       'is_container', 'hide', 'registration_required', 'groups',
                        'old_url', 'js_code')
         }),
     )
     actions = ['create_child']
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name in ['introduction', 'picture_description']:
+            kwargs['widget'] = Textarea(
+                attrs={'rows': 4, 'cols': 60, 'style': 'width: auto;'})
+        if db_field.name == "sites":
+            kwargs["initial"] = [Site.objects.get_current()]
+        if db_field.name in ["title", "title_menu", "css_container_style"]:
+            kwargs['widget'] = TextInput(
+                attrs={'style': 'width: 700px;'})
+        field = super(PageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        self.patch_translation_field(db_field, field, **kwargs)
+        return field
 
     def create_child(self, request, queryset):
         pages_counter = 0
@@ -81,6 +106,16 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
         self.message_user(request, "%s successfully created." % message_bit)
 
     create_child.short_description = "Create child page"
+
+    class Media:
+        js = (
+            'modeltranslation/js/force_jquery.js',
+            '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
 
 admin.site.unregister(FlatPage)
 admin.site.register(models.Page, PageAdmin)

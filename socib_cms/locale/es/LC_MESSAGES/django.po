@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 12:15+0200\n"
-"PO-Revision-Date: 2014-07-15 12:37+0100\n"
+"POT-Creation-Date: 2014-10-03 14:14+0200\n"
+"PO-Revision-Date: 2014-10-03 14:25+0100\n"
 "Last-Translator: Biel Frontera <bfrontera@socib.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,87 +17,155 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: news/models.py:11
-msgid "name"
-msgstr "nombre"
+#: cmsutils/models.py:15
+#: pages/models.py:21
+msgid "order"
+msgstr "orden"
 
-#: news/models.py:12
+#: cmsutils/models.py:54
+msgid "code"
+msgstr "código"
+
+#: cmsutils/models.py:55
+#: cmsutils/models.py:65
+msgid "description"
+msgstr "descripción"
+
+#: cmsutils/models.py:63
+msgid "URL"
+msgstr "URL"
+
+#: cmsutils/models.py:64
 #: news/models.py:51
-msgid "slug"
-msgstr "slug"
-
-#: news/models.py:15
-msgid "news category"
-msgstr "categoría de noticias"
-
-#: news/models.py:16
-msgid "news categories"
-msgstr "categorías de notícias"
-
-#: news/models.py:42
-msgid "category"
-msgstr "categoría"
-
-#: news/models.py:43
-msgid "publishing date"
-msgstr "fecha de publicación"
-
-#: news/models.py:44
-msgid "draft"
-msgstr "borrador"
-
-#: news/models.py:45
 msgid "title"
 msgstr "título"
 
-#: news/models.py:46
-msgid "content"
-msgstr "contenido"
-
-#: news/models.py:47
-#: pages/models.py:13
-msgid "Introduction"
-msgstr "Introducción"
-
-#: news/models.py:49
-msgid "redirect link"
-msgstr "URL redirección"
-
-#: news/models.py:52
-msgid "related news"
-msgstr "notícias relacionadas"
-
-#: news/models.py:54
-#: pages/models.py:25
+#: cmsutils/models.py:67
+#: news/models.py:60
+#: pages/models.py:40
 msgid "picture"
 msgstr "fotografía"
 
-#: news/models.py:55
-#: pages/models.py:26
+#: cmsutils/models.py:69
+#: news/models.py:66
+#: pages/models.py:50
 msgid "CSS class"
 msgstr "clase CSS"
 
-#: news/models.py:61
+#: cmsutils/models.py:72
+#: news/models.py:72
 msgid "date added"
 msgstr "fecha alta"
 
-#: news/models.py:64
+#: cmsutils/models.py:75
+#: news/models.py:75
 msgid "created by"
 msgstr "creado por"
 
-#: news/models.py:65
+#: cmsutils/models.py:76
+#: news/models.py:76
 msgid "date modified"
 msgstr "fecha modificación"
 
-#: news/models.py:68
+#: cmsutils/models.py:79
+#: news/models.py:79
 msgid "update by"
 msgstr "actualizado por"
 
-#: news/models.py:71
-#: news/models.py:72
-#: templates/_header_nav.html:51
+#: cmsutils/models.py:82
+msgid "URL link"
+msgstr "Enlace"
+
+#: cmsutils/models.py:83
+msgid "URL links"
+msgstr "Enlaces"
+
+#: news/models.py:14
+msgid "name"
+msgstr "nombre"
+
+#: news/models.py:15
+#: news/models.py:57
+msgid "slug"
+msgstr "slug"
+
+#: news/models.py:18
+msgid "news category"
+msgstr "categoría de noticias"
+
+#: news/models.py:19
+msgid "news categories"
+msgstr "categorías de notícias"
+
+#: news/models.py:48
+msgid "category"
+msgstr "categoría"
+
+#: news/models.py:49
+msgid "publishing date"
+msgstr "fecha de publicación"
+
+#: news/models.py:50
+msgid "draft"
+msgstr "borrador"
+
+#: news/models.py:52
+msgid "content"
+msgstr "contenido"
+
+#: news/models.py:53
+#: pages/models.py:22
+msgid "Introduction"
+msgstr "Introducción"
+
+#: news/models.py:55
+#: pages/models.py:55
+msgid "redirect link"
+msgstr "URL redirección"
+
+#: news/models.py:58
+msgid "related news"
+msgstr "notícias relacionadas"
+
+#: news/models.py:62
+msgid "attachment"
+msgstr "adjunto"
+
+#: news/models.py:64
+#: pages/models.py:47
+msgid "album"
+msgstr "album"
+
+#: news/models.py:82
+#: news/models.py:83
+#: templates/_header_nav.html:65
 msgid "news"
 msgstr "notícia"
+
+#: pages/admin.py:28
+#: pages/models.py:27
+msgid "parent"
+msgstr "padre"
+
+#: pages/admin.py:53
+msgid "Hierarchy"
+msgstr "Jerarquía"
+
+#: pages/admin.py:56
+msgid "Content"
+msgstr "Contenido"
+
+#: pages/admin.py:60
+msgid "Pictures"
+msgstr "Fotografías"
+
+#: pages/admin.py:63
+msgid "Layout and design"
+msgstr "Layout y diseño"
+
+#: pages/admin.py:69
+msgid "Advanced options"
+msgstr "Opciones avanzadas"
 
 #: pages/forms.py:11
 msgid "first name"
@@ -161,43 +229,111 @@ msgstr "%s Enviar mensaje"
 msgid "Message"
 msgstr "Mensaje"
 
-#: pages/models.py:11
+#: pages/models.py:14
+msgid "Header"
+msgstr "Cabecera"
+
+#: pages/models.py:15
+msgid "Inside extra content"
+msgstr "Dentro del contenido extra"
+
+#: pages/models.py:16
+msgid "As background image"
+msgstr "Como imagen de fondo"
+
+#: pages/models.py:17
+msgid "Do not show"
+msgstr "No mostrar"
+
+#: pages/models.py:20
 msgid "Short title for menu"
 msgstr "Título corto para el menú"
 
-#: pages/models.py:12
-msgid "order"
-msgstr "orden"
+#: pages/models.py:24
+msgid "This text will be used in lists. If empty, the system will use the first 20 words of content"
+msgstr "Este texto se utilizará en listat. Si está vacío, el sistema utilizará las primeras 20 palabras del contenido"
 
-#: pages/models.py:16
+#: pages/models.py:25
+msgid "extra content"
+msgstr "contenido extra"
+
+#: pages/models.py:28
 msgid "related pages"
 msgstr "páginas relacionadas"
 
-#: pages/models.py:18
+#: pages/models.py:30
 msgid "user groups allowed"
 msgstr "grupos permitidos"
 
-#: pages/models.py:20
+#: pages/models.py:32
 msgid "page is just a container"
 msgstr "la página es un contenedor"
 
-#: pages/models.py:21
+#: pages/models.py:33
 msgid "hide this page in lists"
 msgstr "no muestres esta página en las listas"
 
-#: pages/models.py:23
+#: pages/models.py:35
 msgid "list children pages inside this page content"
 msgstr "muestra una lista de las páginas hijas en el contenido de esta página"
+
+#: pages/models.py:38
+msgid "children pages content is shown in sections of this page"
+msgstr "muestra el contenido de las páginas hijas como secciones de esta página"
+
+#: pages/models.py:42
+msgid "picture description"
+msgstr "descripción de la fotografía"
+
+#: pages/models.py:44
+msgid "picture location"
+msgstr "ubicación de la fotografía"
+
+#: pages/models.py:49
+msgid "javascript code"
+msgstr "código javascript"
+
+#: pages/models.py:52
+msgid "CSS styles"
+msgstr "estilos CSS"
+
+#: pages/models.py:54
+msgid "Old URL"
+msgstr "URL antigua"
+
+#: pages/models.py:57
+msgid "show section menu"
+msgstr "muestra el menú de la sección"
+
+#: pages/models.py:59
+msgid "content template name"
+msgstr "plantilla del contenido"
+
+#: pages/models.py:61
+msgid "Example: 'pages/content/intro.html'. If this isn't provided, the system will use 'pages/content/default.html'."
+msgstr "Ejemplo: 'pages/content/intro.html'. En caso de que no se indique, el sistema utilizará 'pages/content/default.html'."
+
+#: pages/models.py:65
+msgid "content columns"
+msgstr "columnas del contenido"
+
+#: pages/models.py:66
+msgid "extra content columns"
+msgstr "columnas del contenido extra"
+
+#: pages/models.py:67
+msgid "float extra content"
+msgstr "flota el contenido extra"
 
 #: pages/views.py:66
 msgid "Page not found"
 msgstr "Página no encontrada"
 
-#: pages/views.py:105
+#: pages/views.py:106
 msgid "Profile updated"
 msgstr "Perfil actualizado"
 
-#: pages/views.py:119
+#: pages/views.py:120
 msgid "Contact"
 msgstr "Contacto"
 
@@ -205,39 +341,40 @@ msgstr "Contacto"
 msgid "Server error"
 msgstr "Error en el servidor"
 
-#: templates/_header_nav.html:42
+#: templates/_header_nav.html:56
 msgid "Administration"
 msgstr "Administración"
 
-#: templates/_header_nav.html:45
+#: templates/_header_nav.html:59
 msgid "Modify this news"
 msgstr "Modifica esta notícia"
 
-#: templates/_header_nav.html:48
+#: templates/_header_nav.html:62
+#: templates/pages/content/default.html:74
 msgid "Modify this page"
 msgstr "Modifica esta página"
 
-#: templates/_header_nav.html:50
+#: templates/_header_nav.html:64
 msgid "pages"
 msgstr "páginas"
 
-#: templates/_header_nav.html:53
+#: templates/_header_nav.html:67
 msgid "users"
 msgstr "usuarios"
 
-#: templates/_header_nav.html:54
+#: templates/_header_nav.html:68
 msgid "groups"
 msgstr "grupos"
 
-#: templates/_header_nav.html:60
-msgid "Change language"
-msgstr "Cambiar idioma"
+#: templates/_header_nav.html:74
+msgid "Language"
+msgstr "Idioma"
 
-#: templates/_header_nav.html:75
+#: templates/_header_nav.html:89
 msgid "Change profile"
 msgstr "Modifica el perfil"
 
-#: templates/_header_nav.html:76
+#: templates/_header_nav.html:90
 msgid "Logout"
 msgstr "Salir"
 
@@ -271,7 +408,7 @@ msgstr "anterior"
 msgid "next"
 msgstr "posterior"
 
-#: templates/news/news.html:49
+#: templates/news/news.html:82
 msgid "Latests news"
 msgstr "Últimas notícias"
 
@@ -401,9 +538,6 @@ msgstr "El usuario y contraseña no son correctos. Prueba otra vez o contacta co
 #~ msgid "common name"
 #~ msgstr "nombre común"
 
-#~ msgid "description"
-#~ msgstr "descripción"
-
 #~ msgid "display order"
 #~ msgstr "Orden visualización"
 
@@ -421,9 +555,6 @@ msgstr "El usuario y contraseña no son correctos. Prueba otra vez o contacta co
 
 #~ msgid "Beach watching"
 #~ msgstr "Vigilancia playa"
-
-#~ msgid "code"
-#~ msgstr "código"
 
 #~ msgid "type"
 #~ msgstr "tipo"
@@ -551,9 +682,6 @@ msgstr "El usuario y contraseña no son correctos. Prueba otra vez o contacta co
 #~ msgid "Show observation list"
 #~ msgstr "Muesta la lista de observaciones"
 
-#~ msgid "Show observation map"
-#~ msgstr "Muestra el mapa"
-
 #~ msgid "No observations found"
 #~ msgstr "No se ha encontrado ninguna observación"
 
@@ -577,9 +705,6 @@ msgstr "El usuario y contraseña no son correctos. Prueba otra vez o contacta co
 
 #~ msgid "Map"
 #~ msgstr "Mapa"
-
-#~ msgid "Picture"
-#~ msgstr "Fotografía"
 
 #~ msgid "Beach List"
 #~ msgstr "Lista de playas"

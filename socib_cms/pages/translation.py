@@ -9,7 +9,8 @@ class FlatPageTranslationOptions(TranslationOptions):
 
 
 class PageTranslationOptions(TranslationOptions):
-    fields = ('title', 'title_menu', 'introduction', 'content',)
+    fields = ('title', 'title_menu', 'introduction', 'content',
+              'extra_content', 'picture_description')
 
 translator.register(FlatPage, FlatPageTranslationOptions)
 translator.register(Page, PageTranslationOptions)

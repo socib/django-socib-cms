@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "pages/page.html" %}
 {% load i18n %}
 {% load envelope_tags %}
 
@@ -13,8 +13,8 @@
 {% include '_breadcumb.html' %}
 {% endblock %}
 
-{% block content %}
-{{ page.content|safe }}
+{% block page_content %}
+{{ block.super }}
 {% render_contact_form %}
 {% endblock %}
 

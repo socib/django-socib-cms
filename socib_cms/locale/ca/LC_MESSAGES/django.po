@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 12:14+0200\n"
-"PO-Revision-Date: 2014-07-15 15:47+0100\n"
+"POT-Creation-Date: 2014-10-03 14:14+0200\n"
+"PO-Revision-Date: 2014-10-03 14:21+0100\n"
 "Last-Translator: Biel Frontera <bfrontera@socib.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,87 +17,155 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: news/models.py:11
-msgid "name"
-msgstr "nom"
+#: cmsutils/models.py:15
+#: pages/models.py:21
+msgid "order"
+msgstr "ordre"
 
-#: news/models.py:12
+#: cmsutils/models.py:54
+msgid "code"
+msgstr "codi"
+
+#: cmsutils/models.py:55
+#: cmsutils/models.py:65
+msgid "description"
+msgstr "descripció"
+
+#: cmsutils/models.py:63
+msgid "URL"
+msgstr "URL"
+
+#: cmsutils/models.py:64
 #: news/models.py:51
-msgid "slug"
-msgstr "slug"
-
-#: news/models.py:15
-msgid "news category"
-msgstr "categoria de notícies"
-
-#: news/models.py:16
-msgid "news categories"
-msgstr "categories de notícies"
-
-#: news/models.py:42
-msgid "category"
-msgstr "categoria"
-
-#: news/models.py:43
-msgid "publishing date"
-msgstr "data de publicació"
-
-#: news/models.py:44
-msgid "draft"
-msgstr "esborrany"
-
-#: news/models.py:45
 msgid "title"
 msgstr "títol"
 
-#: news/models.py:46
-msgid "content"
-msgstr "contingut"
-
-#: news/models.py:47
-#: pages/models.py:13
-msgid "Introduction"
-msgstr "Introducció"
-
-#: news/models.py:49
-msgid "redirect link"
-msgstr "redirecció"
-
-#: news/models.py:52
-msgid "related news"
-msgstr "notícies relacionades"
-
-#: news/models.py:54
-#: pages/models.py:25
+#: cmsutils/models.py:67
+#: news/models.py:60
+#: pages/models.py:40
 msgid "picture"
 msgstr "fotografia"
 
-#: news/models.py:55
-#: pages/models.py:26
+#: cmsutils/models.py:69
+#: news/models.py:66
+#: pages/models.py:50
 msgid "CSS class"
 msgstr "classe CSS"
 
-#: news/models.py:61
+#: cmsutils/models.py:72
+#: news/models.py:72
 msgid "date added"
 msgstr "data de creació"
 
-#: news/models.py:64
+#: cmsutils/models.py:75
+#: news/models.py:75
 msgid "created by"
 msgstr "creat per"
 
-#: news/models.py:65
+#: cmsutils/models.py:76
+#: news/models.py:76
 msgid "date modified"
 msgstr "data de modificació"
 
-#: news/models.py:68
+#: cmsutils/models.py:79
+#: news/models.py:79
 msgid "update by"
 msgstr "actualitzat per"
 
-#: news/models.py:71
-#: news/models.py:72
-#: templates/_header_nav.html:51
+#: cmsutils/models.py:82
+msgid "URL link"
+msgstr "Enllaç"
+
+#: cmsutils/models.py:83
+msgid "URL links"
+msgstr "Enllaços"
+
+#: news/models.py:14
+msgid "name"
+msgstr "nom"
+
+#: news/models.py:15
+#: news/models.py:57
+msgid "slug"
+msgstr "slug"
+
+#: news/models.py:18
+msgid "news category"
+msgstr "categoria de notícies"
+
+#: news/models.py:19
+msgid "news categories"
+msgstr "categories de notícies"
+
+#: news/models.py:48
+msgid "category"
+msgstr "categoria"
+
+#: news/models.py:49
+msgid "publishing date"
+msgstr "data de publicació"
+
+#: news/models.py:50
+msgid "draft"
+msgstr "esborrany"
+
+#: news/models.py:52
+msgid "content"
+msgstr "contingut"
+
+#: news/models.py:53
+#: pages/models.py:22
+msgid "Introduction"
+msgstr "Introducció"
+
+#: news/models.py:55
+#: pages/models.py:55
+msgid "redirect link"
+msgstr "redirecció"
+
+#: news/models.py:58
+msgid "related news"
+msgstr "notícies relacionades"
+
+#: news/models.py:62
+msgid "attachment"
+msgstr "adjunt"
+
+#: news/models.py:64
+#: pages/models.py:47
+msgid "album"
+msgstr "àlbum"
+
+#: news/models.py:82
+#: news/models.py:83
+#: templates/_header_nav.html:65
 msgid "news"
 msgstr "notícies"
+
+#: pages/admin.py:28
+#: pages/models.py:27
+msgid "parent"
+msgstr "pare"
+
+#: pages/admin.py:53
+msgid "Hierarchy"
+msgstr "Jerarquia"
+
+#: pages/admin.py:56
+msgid "Content"
+msgstr "Contingut"
+
+#: pages/admin.py:60
+msgid "Pictures"
+msgstr "Fotografies"
+
+#: pages/admin.py:63
+msgid "Layout and design"
+msgstr "Layout i disseny"
+
+#: pages/admin.py:69
+msgid "Advanced options"
+msgstr "Opciones avanzadas"
 
 #: pages/forms.py:11
 msgid "first name"
@@ -161,43 +229,111 @@ msgstr "%s Envia el missatge"
 msgid "Message"
 msgstr "Missatge"
 
-#: pages/models.py:11
+#: pages/models.py:14
+msgid "Header"
+msgstr "Capçalera"
+
+#: pages/models.py:15
+msgid "Inside extra content"
+msgstr "Dins contingut extra"
+
+#: pages/models.py:16
+msgid "As background image"
+msgstr "Com a imatge de fons"
+
+#: pages/models.py:17
+msgid "Do not show"
+msgstr "No mostris"
+
+#: pages/models.py:20
 msgid "Short title for menu"
 msgstr "Títol curt per al menú"
 
-#: pages/models.py:12
-msgid "order"
-msgstr "ordre"
+#: pages/models.py:24
+msgid "This text will be used in lists. If empty, the system will use the first 20 words of content"
+msgstr "Aquest text s'utilitzarà a les llistes. Si està buit, utilitzarà les primeres 20 paraules del contingut"
 
-#: pages/models.py:16
+#: pages/models.py:25
+msgid "extra content"
+msgstr "contingut extra"
+
+#: pages/models.py:28
 msgid "related pages"
 msgstr "pàgines relacionades"
 
-#: pages/models.py:18
+#: pages/models.py:30
 msgid "user groups allowed"
 msgstr "grups permessos"
 
-#: pages/models.py:20
+#: pages/models.py:32
 msgid "page is just a container"
 msgstr "la pàgina és només un contenedor"
 
-#: pages/models.py:21
+#: pages/models.py:33
 msgid "hide this page in lists"
 msgstr "amaga aquesta pàgina a les llistes"
 
-#: pages/models.py:23
+#: pages/models.py:35
 msgid "list children pages inside this page content"
 msgstr "mostra una llista de les pàgines filles a dins del contingut d'aquesta pàgina"
+
+#: pages/models.py:38
+msgid "children pages content is shown in sections of this page"
+msgstr "mostra el contingut de les pàgines filles com a seccions d'aquesta pàgina"
+
+#: pages/models.py:42
+msgid "picture description"
+msgstr "descripció de la fotografia"
+
+#: pages/models.py:44
+msgid "picture location"
+msgstr "ubicació de la fotografia"
+
+#: pages/models.py:49
+msgid "javascript code"
+msgstr "codi javascript"
+
+#: pages/models.py:52
+msgid "CSS styles"
+msgstr "estils CSS"
+
+#: pages/models.py:54
+msgid "Old URL"
+msgstr "URL antiga"
+
+#: pages/models.py:57
+msgid "show section menu"
+msgstr "mostra el menú de la secció"
+
+#: pages/models.py:59
+msgid "content template name"
+msgstr "nom de la plantilla del contingut"
+
+#: pages/models.py:61
+msgid "Example: 'pages/content/intro.html'. If this isn't provided, the system will use 'pages/content/default.html'."
+msgstr "Exemple: 'pages/content/intro.html'. Si no s'indica, el sistema utilitzarà 'pages/content/default.html'."
+
+#: pages/models.py:65
+msgid "content columns"
+msgstr "columnes del contingut"
+
+#: pages/models.py:66
+msgid "extra content columns"
+msgstr "columnes del contingut extra"
+
+#: pages/models.py:67
+msgid "float extra content"
+msgstr "flota el contingut extra"
 
 #: pages/views.py:66
 msgid "Page not found"
 msgstr "Pàgina no trobada"
 
-#: pages/views.py:105
+#: pages/views.py:106
 msgid "Profile updated"
 msgstr "Perfil actualitzat"
 
-#: pages/views.py:119
+#: pages/views.py:120
 msgid "Contact"
 msgstr "Contacta"
 
@@ -205,39 +341,40 @@ msgstr "Contacta"
 msgid "Server error"
 msgstr "Error al servidor"
 
-#: templates/_header_nav.html:42
+#: templates/_header_nav.html:56
 msgid "Administration"
 msgstr "Administració"
 
-#: templates/_header_nav.html:45
+#: templates/_header_nav.html:59
 msgid "Modify this news"
 msgstr "Modifica aquesta notícia"
 
-#: templates/_header_nav.html:48
+#: templates/_header_nav.html:62
+#: templates/pages/content/default.html:74
 msgid "Modify this page"
 msgstr "Modifica aquesta pàgina"
 
-#: templates/_header_nav.html:50
+#: templates/_header_nav.html:64
 msgid "pages"
 msgstr "pàgines"
 
-#: templates/_header_nav.html:53
+#: templates/_header_nav.html:67
 msgid "users"
 msgstr "usuaris"
 
-#: templates/_header_nav.html:54
+#: templates/_header_nav.html:68
 msgid "groups"
 msgstr "grups"
 
-#: templates/_header_nav.html:60
-msgid "Change language"
-msgstr "Canvia l'idioma"
+#: templates/_header_nav.html:74
+msgid "Language"
+msgstr "Idioma"
 
-#: templates/_header_nav.html:75
+#: templates/_header_nav.html:89
 msgid "Change profile"
 msgstr "Canvia el perfil"
 
-#: templates/_header_nav.html:76
+#: templates/_header_nav.html:90
 msgid "Logout"
 msgstr "Surt"
 
@@ -271,7 +408,7 @@ msgstr "anterior"
 msgid "next"
 msgstr "posterior"
 
-#: templates/news/news.html:49
+#: templates/news/news.html:82
 msgid "Latests news"
 msgstr "Darreres notícies"
 

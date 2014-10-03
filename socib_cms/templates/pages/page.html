@@ -36,7 +36,7 @@
   </div>
   <div class="{% block page_main_cols %}col-md-9 col-sm-8 col-xs-12{% endblock%}">
     {% block page_content %}
-      {% include 'pages/section-default.html' %}
+      {% include page.get_content_template %}
       {% if page.list_children %}
         <div class="row list-children-pages">
         {% for node in page.get_children %}
