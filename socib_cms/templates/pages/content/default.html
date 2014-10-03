@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load thumbnail %}
 
-<section id="{{ page.title|slugify }}" class="{{ page.css_class|default_if_none:""}}" style="{{ page.css_container_style|default_if_none:""}}{% if page.picture and page.picture_location == 'background' %}background-image: url('{{page.picture.url}}'); background-size: 100%; background-repeat: no-repeat; background-position: right bottom;;{% endif %}">
+<section id="{{ page.title|slugify }}" class="{{ page.css_class|default_if_none:""}}" style="{% if page.picture and page.picture_location == 'background' %}background-image: url('{{page.picture.url}}'); background-size: contain; background-repeat: no-repeat; background-position: right bottom;{% endif %}{{ page.css_container_style|default_if_none:""}}">
   <div class="section-heading text-center">
     <div class="container">
       <div class="row">
