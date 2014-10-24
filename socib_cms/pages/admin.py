@@ -3,6 +3,7 @@ from django.contrib.flatpages.admin import FlatpageForm, FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.template.defaultfilters import slugify
 from django.db.models import TextField
 from django.contrib.sites.models import Site
 from django.forms import Textarea, TextInput
@@ -15,6 +16,10 @@ import models
 
 
 class PageForm(FlatpageForm):
+
+    def __init__(self, *args, **kwargs):
+        super(FlatpageForm, self).__init__(*args, **kwargs)
+        self.fields['url'].initial = u'/auto-generate-url-from-title/'
 
     class Meta:
         model = models.Page
@@ -74,6 +79,14 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
         }),
     )
     actions = ['create_child']
+
+    def save_model(self, request, obj, form, change):
+        if obj.url == u'/auto-generate-url-from-title/':
+            if obj.parent.id:
+                obj.url = "%s%s/" % (obj.parent.url, slugify(obj.title)[0:25])
+            else:
+                obj.url = "/%s/" % slugify(obj.title)[0:50]
+        obj.save()
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in ['introduction', 'picture_description']:

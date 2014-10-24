@@ -3,7 +3,7 @@
 <div class="extra-content-wrapper col-md-{{ page.extra_content_columns }} pull-right">
   {% if page.picture and page.picture_location == 'extra' %}
     <div class="page-picture">
-      <img src="{% thumbnail page.picture 450x0 upscale crop subject_location=page.picture.subject_location  %}" class="img-responsive"></a>
+      <img src="{% thumbnail page.picture 450x0 upscale crop subject_location=page.picture.subject_location  %}" class="img-responsive">
       {% if page.picture_description %}
       <p>{{ page.picture_description|safe }}</p>
       {% endif %}
