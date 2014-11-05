@@ -63,7 +63,9 @@
           {% include "pages/content/extra.html" %}
           {% endif %}
           <div class="page-content">
+          {% block section_content %}
           {{ page.content|safe }}
+          {% endblock%}
           </div>
         </div>
         {% if not page.float_extra_content %}
