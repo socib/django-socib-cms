@@ -1,0 +1,113 @@
+{% extends "pages/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+{% load socib_extras %}
+
+{% block title_head %}{{ block.super }}: {{ search_page.title }}{% endblock %}
+
+{% block title %}
+{% endblock %}
+{% block mainclass %}container {{ search_page.css_class }}{% endblock mainclass%}
+{% block bodyclass %}{{ search_page.css_class }}{% endblock bodyclass%}
+
+{% block breadscrumbs %}
+{% include '_breadcumb.html' with page=search_page %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="{% block page_sidebar_cols %}col-md-3 col-sm-4 col-xs-12{% endblock %}">
+    {% if query %}        
+        <h2>{% trans 'Narrow your search' %}</h2>
+        <div>
+            <dl>
+                {% if facets.dates.pub_date %}
+                    <dt>Year</dt>                    
+                    {% for pub_date in facets.dates.pub_date %}
+                        <dd><a href="?q={{ query }}&amp;year={{ pub_date.0|date:"Y"}}">{{ pub_date.0|date:"Y" }}</a> ({{ pub_date.1 }})</dd>
+                    {% endfor %}
+                {% else %}
+                    <p>No date facets.</p>
+                {% endif %}
+            </dl>
+        </div>
+    {% endif %}
+  </div>
+  <div class="{% block page_main_cols %}col-md-9 col-sm-8 col-xs-12{% endblock%}">
+    {% block page_content %}
+      {% include search_page.get_content_template with page=search_page %}
+    {% endblock %}
+    <form method="get" action="." class="form-horizontal">
+        <div class="form-group">
+            <label for="id_q" class="col-sm-2 control-label">{% trans 'Cercar' %}:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="id_q" name="q" placeholder="{% trans 'Text a cercar' %}" value="{{ query }}">
+            </div>
+        </div>    
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">{% trans 'Cerca' %}</button>
+            </div>
+        </div>        
+    </form>    
+
+        {% if query %}
+            <h3>{% trans 'Results' %}</h3>
+            {% if suggestion %}
+                <div class="alert alert-warning search-suggestion" role="alert"><a href="?q={{ suggestion }}" title="Suggested search">{% blocktrans %}Did you mean '{{ suggestion }}'?{% endblocktrans %}</a></div>
+            {% endif %}
+
+            {% for result in page.object_list %}
+                <div class="search-results">
+                    <h4><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></h4>
+                    <p class="result-summary">{% if result.object.publish_date %}{{ result.object.publish_date|date:"d-m-Y" }} | {% endif %}{{ result.object.summary|safe }}</p>
+                </div>
+            {% empty %}
+                <p>{% trans 'No results found.' %}</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div class="pagination-wrapper">
+                  <ul class="pagination">
+                      {% if page.has_previous %}
+                          <li><a href="?q={{ query }}&amp;page={{ page.previous_page_number }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+                      {% else %}
+                          <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+                      {% endif %}
+                      {% for page_number in page.paginator.page_range %}
+                          {% if page_number == 1  or page_number == page.paginator.num_pages or page_number < page.number|add:3 and page_number > page.number|subtract:3 %}
+                              {% ifequal page_number page.number %}
+                                  <li class="current page active"><a href="#">{{ page_number }}</a></li>
+                              {% else %}
+                                  <li><a href="?q={{ query }}&amp;page={{ page_number }}" class="page">{{ page_number }}</a></li>
+                              {% endifequal %}
+                          {% else %}
+                              {% if page_number == page.number|add:3 or page_number == page.number|subtract:3 %}
+                              <li><a href="#">...</a></li>
+                              {% endif %}
+                          {% endif %}
+                      {% endfor %}
+                      {% if page.has_next %}
+                          <li><a href="?q={{ query }}&amp;page={{ page.next_page_number }}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+                      {% else %}
+                          <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+                      {% endif %}
+                  </ul>
+                </div>                
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+  {% if search_page.js_code %}
+  <script type="text/javascript">
+    {{ search_page.js_code|safe }}
+  </script>
+  {% endif %}
+{% endblock page_js %}

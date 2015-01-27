@@ -1,10 +1,12 @@
 # coding: utf-8
+from datetime import date
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, HTML, ButtonHolder
 from crispy_forms.bootstrap import StrictButton
 from envelope.forms import BaseContactForm
+from haystack.forms import FacetedSearchForm
 
 
 class UserProfileForm(forms.Form):
@@ -113,3 +115,23 @@ class WebContactForm(BaseContactForm):
     # def get_context(self):
     #     raise AttributeError('Prova')
     #     return self.cleaned_data.copy()
+
+
+class YearFacetedModelSearchForm(FacetedSearchForm):
+    year = forms.IntegerField(required=False, widget=forms.HiddenInput)
+
+    def search(self):
+        sqs = super(YearFacetedModelSearchForm, self).search()
+
+        sqs = sqs.date_facet(
+            'pub_date',
+            start_date=date(2000, 1, 1),
+            end_date=date.today(),
+            gap_by='year')
+
+        if hasattr(self, 'cleaned_data') and self.cleaned_data['year']:
+            year = self.cleaned_data['year']
+            sqs = sqs.narrow("pub_date:[{d1} TO {d2}]".format(
+                d1=date(year, 1, 1).isoformat(),
+                d2=date(year + 1, 1, 1).isoformat()))
+        return sqs

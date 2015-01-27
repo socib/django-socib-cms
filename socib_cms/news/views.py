@@ -6,8 +6,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.syndication.views import Feed
 from localeurl.models import django_reverse as reverse
+from haystack.query import SearchQuerySet
 from socib_cms.pages.views import BasePageView
 from socib_cms.pages.models import Page
+from socib_cms.cmsutils.views import JSONResponseMixin
 import models
 
 
@@ -105,3 +107,30 @@ class NewsFeed(Feed):
 
     def item_pubdate(self, item):
         return datetime.combine(item.publish_date, time())
+
+
+class NewsMoreLikeThisView(JSONResponseMixin, DetailView):
+
+    model = models.News
+    context_object_name = 'news'
+
+    def get(self, request, *args, **kwargs):
+        obj = self.get_object()
+        sqs = SearchQuerySet().models(models.News).more_like_this(obj)
+        news_list = []
+        for result in sqs[:5]:
+            try:
+                news = {
+                    'score': result.score,
+                    'title': result.object.title,
+                    'url': result.object.get_absolute_url(),
+                    'summary': result.object.summary,
+                    'publish_date': result.object.publish_date.isoformat()
+                }
+                news_list.append(news)
+            except:
+                pass
+        return self.render_to_response(news_list)
+
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)

@@ -29,14 +29,17 @@ setup(
         'django-admin-shortcuts',
         'python-ldap',
         'django-auth-ldap',
-        'django-envelope',
+        'django-envelope==0.7',
         'django-honeypot',
         'django-crispy-forms',
         'django-tables2',
         'django_compressor',
         # 'ckeditor_filer',
         'django-ace',
-        'django-genericadmin==0.6.1'
+        'django-genericadmin==0.6.1',
+        'elasticsearch==1.3.0',
+        'haystack==0.15',
+        'django-haystack==2.3.1'
     ),
     # dependency_links=[
     #     'git+https://github.com/bielfrontera/django-ckeditor-filer.git#egg=ckeditor_filer-1.0'

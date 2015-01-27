@@ -50,6 +50,14 @@
               {% endrecursetree %}
               {% endif %}
               </ul>
+              <div class="search-form pull-right">
+                <form action="{% url 'socib_search_view' %}" class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="q">Search</label>
+                    <input type="text" class="form-control input-sm" id="q" name="q" placeholder="{% trans 'Search' %}">
+                  </div>
+                </form>
+              </div>              
               <ul class="nav navbar-nav navbar-right">
                 {% if user.is_staff %}
                 <li class="dropdown">

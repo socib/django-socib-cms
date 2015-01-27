@@ -4,8 +4,11 @@ from filer.fields.image import FilerImageField
 from filer.fields.folder import FilerFolderField
 from django.contrib.auth.models import Group
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.flatpages.models import FlatPage
+from django.template.defaultfilters import truncatewords, striptags
 from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import cached_property
 
 
 class Page(MPTTModel, FlatPage):
@@ -65,6 +68,15 @@ class Page(MPTTModel, FlatPage):
     content_columns = models.IntegerField(_('content columns'), default=12)
     extra_content_columns = models.IntegerField(_('extra content columns'), default=4)
     float_extra_content = models.BooleanField(_('float extra content'), default=True)
+    # Audit
+    created_on = models.DateTimeField(_('date added'), auto_now_add=True)
+    created_by = models.ForeignKey(User, blank=True, null=True,
+                                   editable=False, related_name='created-page',
+                                   verbose_name=_('created by'))
+    updated_on = models.DateTimeField(_('date modified'), auto_now=True)
+    updated_by = models.ForeignKey(User, blank=True, null=True,
+                                   editable=False, related_name='updated-page',
+                                   verbose_name=_('update by'))
 
     tree = TreeManager()
 
@@ -72,6 +84,12 @@ class Page(MPTTModel, FlatPage):
         order_insertion_by = ['order']
 
     def __unicode__(self):
+        return self.title
+
+    @cached_property
+    def full_path_title(self):
+        if self.parent:
+            return self.parent.full_path_title + " / " + self.title
         return self.title
 
     @property
@@ -90,7 +108,7 @@ class Page(MPTTModel, FlatPage):
         if self.is_root_node():
             return self
         else:
-            if self.is_leaf_node_or_hidden_children():
+            if self.is_leaf_node_or_hidden_children() and self.parent:
                 return self.parent
             else:
                 return self
@@ -106,6 +124,16 @@ class Page(MPTTModel, FlatPage):
         if self.redirect_link:
             return self.redirect_link
         return self.url
+
+    @property
+    def publish_date(self):
+        return self.updated_on
+
+    @property
+    def summary(self):
+        if self.introduction:
+            return self.introduction
+        return truncatewords(striptags(self.content), 50)
 
     def is_leaf_node_or_hidden_children(self):
         """

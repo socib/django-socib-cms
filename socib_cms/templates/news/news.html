@@ -74,6 +74,13 @@
     <div class="news-content">
       {{ news.content|safe }}
     </div>
+    <div id="news-more-like-this">
+      <!--
+        <div class="news-more-like-this">
+          <h3>{% trans "More like this" %}</h3>
+        </div>
+      -->    
+    </div>
   </div>
   <div class="col-md-4 col-sm-12">
     {% if news.picture %}
@@ -83,7 +90,7 @@
     <div class="list-group">
     {% for item in news.category.news_set.latest10 %}
         {% if item != news %}
-        <a class="list-group-item" href="{{ item.get_absolute_url }}">{{ item.title|truncatechars:60 }}</a>
+        <a class="list-group-item" href="{{ item.get_absolute_url }}">{{ item.publish_date|date:"d-m-Y" }} | {{ item.title|truncatechars:80 }}</a>
         {% endif %}
     {% endfor %}
     </div>
@@ -92,6 +99,7 @@
 {% endblock %}
 
 {% block page_js %}
+<script src="{% static "js/vendors/jquery.lazyload-any.min.js" %}"></script>
 <script type="text/javascript">
   $(function() {
     $(".navbar li a[href='{% url 'news_category_detail' news.category.slug %}']").parent().addClass('active');
@@ -102,7 +110,39 @@
         parent.addClass('active');
       }
     });
+
+    function pad(val, len) {
+      val = String(val);
+      len = len || 2;
+      while (val.length < len) val = "0" + val;
+      return val;
+    };
+
+    // Load more like this    
+    $('#news-more-like-this').lazyload({
+      // Sets the pixels to load earlier. Setting threshold to 200 causes image to load 200 pixels
+      // before it appears on viewport. It should be greater or equal zero.
+      threshold: 100,
+
+      // Sets the callback function when the load event is firing.
+      // element: The content in lazyload tag will be returned as a jQuery object.
+      load: function(element) {
+        $.getJSON( "{% url 'news_mlt' news.pk %}", function(data) {
+          var items = [];
+          for(i=0, l=data.length; i<l; i++){
+            var date = new Date(data[i].publish_date);
+            pub_date = pad(date.getDate(), 2) + "/" +  pad(date.getMonth() + 1, 2) + "/" + date.getFullYear();
+            items.push("<li class='list-group-item'><a href='" + data[i].url +"' title='" + data[i].summary + "'>" + pub_date + " | " + data[i].title +"</a></li>");
+          };
+         
+          $("<ul />", {
+            "class": "list-group news-more-like-this-list",
+            html: items.join("")
+          }).appendTo(element);
+        });        
+      },
+    });    
+
   });
 </script>
 {% endblock page_js %}
-

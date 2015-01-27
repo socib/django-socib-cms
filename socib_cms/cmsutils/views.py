@@ -2,6 +2,7 @@
 
 from django.http import HttpResponse
 import mimetypes
+import json
 import urllib2
 
 
@@ -18,3 +19,19 @@ def proxy_to(request, path, target_url):
         return HttpResponse(e.msg, status=e.code, mimetype='text/plain')
     else:
         return HttpResponse(content, status=status_code, mimetype=mimetype)
+
+
+class JSONResponseMixin(object):
+    def render_to_json_response(self, context, **response_kwargs):
+        """
+        Returns a JSON response, transforming 'context' to make the payload.
+        """
+        return HttpResponse(json.dumps(self.get_data(context)),
+                            content_type='application/json',
+                            **response_kwargs)
+
+    def get_data(self, context):
+        """
+        Returns an object that will be serialized as JSON by json.dumps().
+        """
+        return context

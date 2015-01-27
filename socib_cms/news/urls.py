@@ -7,6 +7,10 @@ urlpatterns = patterns(
         views.NewsFeed(),
         name='news_feed'
         ),
+    url(r'^(?P<pk>\d+)/more_like_this$',
+        views.NewsMoreLikeThisView.as_view(),
+        name='news_mlt',
+        ),
     url(r'^(?P<slug>[-\w]+)/$',
         views.NewsCategoryDetailView.as_view(),
         name='news_category_detail',

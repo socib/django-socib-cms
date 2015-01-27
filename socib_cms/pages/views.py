@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from envelope.views import ContactView
+from haystack.views import FacetedSearchView
 from localeurl.models import django_reverse as reverse
 import models
 import forms
@@ -124,3 +125,47 @@ class WebContactView(ContactView, BasePageView):
         context = super(WebContactView, self).get_context_data(**kwargs)
         context['page'] = self.get_page()
         return context
+
+
+class SocibSearchView(FacetedSearchView):
+
+    def __init__(self, *args, **kwargs):
+        if kwargs.get('form_class') is None:
+            kwargs['form_class'] = forms.YearFacetedModelSearchForm
+        super(SocibSearchView, self).__init__(*args, **kwargs)
+
+    def __call__(self, request):
+        return super(SocibSearchView, self).__call__(request)
+
+    def get_page(self):
+        try:
+            url = reverse('socib_search_view')
+            page = models.Page.objects.get(url=url)
+        except ObjectDoesNotExist:
+            page = models.Page()
+            page.title = _('Search')
+            page.url = reverse('socib_search_view')
+        return page
+
+    def extra_context(self):
+        extra = super(SocibSearchView, self).extra_context()
+        extra['suggestion'] = ''
+        if self.query and \
+           hasattr(self.results, 'query') and \
+           self.results.query.backend.include_spelling:
+            if self.results.spelling_suggestion() and \
+               self.results.spelling_suggestion().lower() != self.query.strip().lower():
+                extra['suggestion'] = self.results.spelling_suggestion()
+
+        self.pages = models.Page.objects.get(url='/').get_descendants()
+
+        if not self.request.user.is_superuser:
+            # Exclude pages with registration_required and that not include
+            # any group from the user
+            self.pages = self.pages.exclude(
+                ~Q(groups=None),
+                ~Q(groups__in=self.request.user.groups.all()),
+                registration_required=True)
+        extra['pages'] = self.pages
+        extra['search_page'] = self.get_page()
+        return extra
