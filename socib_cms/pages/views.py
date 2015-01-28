@@ -168,4 +168,21 @@ class SocibSearchView(FacetedSearchView):
                 registration_required=True)
         extra['pages'] = self.pages
         extra['search_page'] = self.get_page()
+        extra['year'] = None
+        extra['section_names'] = []
+        extra['facet_query'] = ''
+        if hasattr(self.form, 'cleaned_data') and\
+           'year' in self.form.cleaned_data and\
+           self.form.cleaned_data['year']:
+            extra['year'] = self.form.cleaned_data['year']
+            extra['facet_query'] += u"&year=%s" % extra['year']
+        if hasattr(self.form, 'selected_facets'):
+            for facet in self.form.selected_facets:
+                if ":" not in facet:
+                    continue
+                field, value = facet.split(":", 1)
+                if field != "section_name":
+                    continue
+                extra['section_names'].append(value)
+                extra['facet_query'] += u"&selected_facets=section_name:%s" % value
         return extra

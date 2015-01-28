@@ -27,7 +27,11 @@
                     <dt>{% trans 'Year' %}</dt> 
                     <div class="list-group">
                     {% for pub_date in facets.dates.pub_date %}
-                        <a class="list-group-item" href="{{ request.get_full_path }}&amp;year={{ pub_date.0|date:"Y"}}">{{ pub_date.0|date:"Y" }} <span class="badge">{{ pub_date.1 }}</span></a>
+                        {% if year and year = pub_date.0.year %}
+                            <a class="list-group-item active" title="{% trans 'Remove filter' %}" href="?q={{ query }}">{{ pub_date.0|date:"Y" }} <span class="badge">{{ pub_date.1 }}</span></a>
+                        {% else %}
+                            <a class="list-group-item" title="{% trans 'Apply filter' %}" href="{{ request.get_full_path }}&amp;year={{ pub_date.0|date:"Y"}}">{{ pub_date.0|date:"Y" }} <span class="badge">{{ pub_date.1 }}</span></a>
+                        {% endif %}
                     {% endfor %}
                     </div>
                 {% else %}
@@ -37,7 +41,11 @@
                     <dt>{% trans 'Section' %}</dt>                    
                     <div class="list-group">
                     {% for section in facets.fields.section_name %}
-                        <a class="list-group-item" href="{{ request.get_full_path }}&amp;selected_facets=section_name:{{ section.0|urlencode }}">{{ section.0 }} <span class="badge">{{ section.1 }}</span></a>
+                        {% if section_names and section.0 in section_names %}
+                            <a class="list-group-item active" title="{% trans 'Remove filter' %}" href="?q={{ query }}">{{ section.0 }} <span class="badge">{{ section.1 }}</span></a>
+                        {% else %}
+                            <a class="list-group-item" title="{% trans 'Apply filter' %}" href="{{ request.get_full_path }}&amp;selected_facets=section_name:{{ section.0|urlencode }}">{{ section.0 }} <span class="badge">{{ section.1 }}</span></a>
+                        {% endif %}
                     {% endfor %}
                     </div>
                 {% else %}
@@ -84,7 +92,7 @@
                 <div class="pagination-wrapper">
                   <ul class="pagination">
                       {% if page.has_previous %}
-                          <li><a href="?q={{ query }}&amp;page={{ page.previous_page_number }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+                          <li><a href="?q={{ query }}{{ facet_query }}&amp;page={{ page.previous_page_number }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
                       {% else %}
                           <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
                       {% endif %}
@@ -93,7 +101,7 @@
                               {% ifequal page_number page.number %}
                                   <li class="current page active"><a href="#">{{ page_number }}</a></li>
                               {% else %}
-                                  <li><a href="?q={{ query }}&amp;page={{ page_number }}" class="page">{{ page_number }}</a></li>
+                                  <li><a href="?q={{ query }}{{ facet_query }}&amp;page={{ page_number }}" class="page">{{ page_number }}</a></li>
                               {% endifequal %}
                           {% else %}
                               {% if page_number == page.number|add:3 or page_number == page.number|subtract:3 %}
@@ -102,7 +110,7 @@
                           {% endif %}
                       {% endfor %}
                       {% if page.has_next %}
-                          <li><a href="?q={{ query }}&amp;page={{ page.next_page_number }}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+                          <li><a href="?q={{ query }}{{ facet_query }}&amp;page={{ page.next_page_number }}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
                       {% else %}
                           <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
                       {% endif %}
