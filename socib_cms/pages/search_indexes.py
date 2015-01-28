@@ -6,6 +6,7 @@ import models
 class PageIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     pub_date = indexes.DateTimeField(model_attr='updated_on')
+    section_name = indexes.CharField(faceted=True)
 
     def get_model(self):
         return models.Page
@@ -15,3 +16,6 @@ class PageIndex(indexes.SearchIndex, indexes.Indexable):
         if using is not None and using[-3:-2] == '_':
             translation.activate(using[-2:])
         return self.get_model().objects.filter(hide=False)
+
+    def prepare_section_name(self, obj):
+        return obj.sector.title

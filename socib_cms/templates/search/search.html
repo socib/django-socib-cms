@@ -20,16 +20,28 @@
 <div class="row">
   <div class="{% block page_sidebar_cols %}col-md-3 col-sm-4 col-xs-12{% endblock %}">
     {% if query %}        
-        <h2>{% trans 'Narrow your search' %}</h2>
-        <div>
+        <h3>{% trans 'Narrow your search' %}</h3>
+        <div class="search-facets">
             <dl>
                 {% if facets.dates.pub_date %}
-                    <dt>Year</dt>                    
+                    <dt>{% trans 'Year' %}</dt> 
+                    <div class="list-group">
                     {% for pub_date in facets.dates.pub_date %}
-                        <dd><a href="?q={{ query }}&amp;year={{ pub_date.0|date:"Y"}}">{{ pub_date.0|date:"Y" }}</a> ({{ pub_date.1 }})</dd>
+                        <a class="list-group-item" href="{{ request.get_full_path }}&amp;year={{ pub_date.0|date:"Y"}}">{{ pub_date.0|date:"Y" }} <span class="badge">{{ pub_date.1 }}</span></a>
                     {% endfor %}
+                    </div>
                 {% else %}
-                    <p>No date facets.</p>
+                    <p>{% trans 'No date facets.' %}</p>
+                {% endif %}
+                {% if facets.fields.section_name %}
+                    <dt>{% trans 'Section' %}</dt>                    
+                    <div class="list-group">
+                    {% for section in facets.fields.section_name %}
+                        <a class="list-group-item" href="{{ request.get_full_path }}&amp;selected_facets=section_name:{{ section.0|urlencode }}">{{ section.0 }} <span class="badge">{{ section.1 }}</span></a>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <p>{% trans 'No section facets.' %}</p>
                 {% endif %}
             </dl>
         </div>

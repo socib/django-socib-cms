@@ -129,6 +129,8 @@ class YearFacetedModelSearchForm(FacetedSearchForm):
             end_date=date.today(),
             gap_by='year')
 
+        sqs = sqs.facet('section_name')
+
         if hasattr(self, 'cleaned_data') and self.cleaned_data['year']:
             year = self.cleaned_data['year']
             sqs = sqs.narrow("pub_date:[{d1} TO {d2}]".format(
