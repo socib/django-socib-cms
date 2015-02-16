@@ -245,6 +245,29 @@ ul.menu-list {
   text-shadow: #000 1px 1px 20px;
 }
 
+.news-latest-list a{
+  border-left: 0;
+  border-right: 0;  
+  position: relative;
+  padding-left: 100px;
+  min-height: 75px;
+}
+
+.news-latest-list .list-group-item:first-child {
+  border-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.news-latest-list .list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.news-latest-list a img{
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}
 
 @import "headernav.less";
 @import "footer.less";
