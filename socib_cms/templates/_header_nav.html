@@ -21,22 +21,34 @@
               {% recursetree pages %}
                 {% if not node.registration_required or user.is_authenticated %}
                   {% if not node.hide %}
-                  <li class="{{ node.css_class }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}dropdown{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE  %}active{% endif %} {% if page and page.url == node.url %}active{% endif %}">
+                  {% if node.get_level == 2 %}
+                    <li class="col-sm-3">
+                      <ul>
+                  {% endif %}                  
+                  <li class="{{ node.css_class }} {% if node.get_level == 2 and not node.is_leaf_node_or_hidden_children  %}dropdown-header{% endif %} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}dropdown dropdown-large{% endif %}  {% if request.path == node.url|chlocale:LANGUAGE_CODE  %}active{% endif %} {% if page and page.url == node.url %}active{% endif %}">
                     <a href="{% if node.is_container %}#{% else %}{{ node.url|chlocale:LANGUAGE_CODE }}{% endif %}"
-                       {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %} class="dropdown-toggle" {% endif %} >
-                      {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 3 %}<b class="caret"></b>{% endif %}</a>
+                       {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %} class="dropdown-toggle" {% endif %} >
+                      {{ node.title_menu }} {% if not node.is_leaf_node_or_hidden_children and node.get_level < 2 %}<b class="caret"></b>{% endif %}</a>
                     {% if not node.is_leaf_node_or_hidden_children and not node.include_children and node.get_level < 3 %}
-                    <ul class="dropdown-menu">
-                        {{ children }}
-                    </ul>
+                    {% if node.get_level == 1 %}
+                      <ul class="dropdown-menu dropdown-menu-large row">
                     {% endif %}
-                    {% if node.include_children and node.list_children and node.get_level < 3 %}
-                    <ul class="dropdown-menu">
+                        {{ children }}
+                    {% if node.get_level == 1 %}
+                      </ul>
+                    {% endif %}
+                    {% endif %}                    
+                    {% if node.include_children and node.list_children and node.get_level < 2 %}
+                    <ul class="dropdown-menu dropdown-menu-large row">
                       {% for child in node.get_children %}
                         {% if not child.registration_required or user.is_authenticated %}
                           {% if not child.hide %}
-                          <li class="{{ child.css_class }}">
-                            <a href="{{ node.url|chlocale:LANGUAGE_CODE }}#{{ child.title|slugify }}">{{ child.title_menu }}</a>
+                          <li class="col-sm-3">
+                            <ul>                          
+                            <li class="{{ child.css_class }}">
+                              <a href="{{ node.url|chlocale:LANGUAGE_CODE }}#{{ child.title|slugify }}">{{ child.title_menu }}</a>
+                            </li>
+                            </ul>
                           </li>
                           {% endif %}
                         {% endif %}
@@ -46,18 +58,15 @@
 
                   {% endif %}
                 </li>
+                {% if node.get_level == 2 %}
+                  </ul>
+                </li>
+                {% endif %}
+
                 {% endif %}
               {% endrecursetree %}
               {% endif %}
-              </ul>
-              <div class="search-form pull-right">
-                <form action="{% url 'socib_search_view' %}" class="form-inline">
-                  <div class="form-group">
-                    <label class="sr-only" for="q">Search</label>
-                    <input type="text" class="form-control input-sm" id="q" name="q" placeholder="{% trans 'Search' %}">
-                  </div>
-                </form>
-              </div>              
+              </ul>              
               <ul class="nav navbar-nav navbar-right">
                 {% if user.is_staff %}
                 <li class="dropdown">
@@ -77,6 +86,14 @@
                     </ul>
                 </li>
                 {% endif %}
+                  <li class="search-form">
+                    <form action="{% url 'socib_search_view' %}" class="form-inline">
+                      <div class="form-group">
+                        <label class="sr-only" for="q">Search</label>
+                        <input type="text" class="form-control input-sm" id="q" name="q" placeholder="{% trans 'Search' %}">
+                      </div>
+                    </form>
+                  </li>                
 
                   <li class="dropdown change-lang">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">{% trans 'Language' %} <b class="caret"></b></a>
