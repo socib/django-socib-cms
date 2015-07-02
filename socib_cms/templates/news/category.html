@@ -33,7 +33,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-12">
           <h3><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h3>
-          <p>{{ news.summary }}</p>
+          <p>{{ news.summary|safe }}</p>
           <p class="pull-right">
             {% for tag in news.tags.all %}
             <span class="label label-default">{{ tag }}</span>

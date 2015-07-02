@@ -55,6 +55,8 @@ class Page(MPTTModel, FlatPage):
     css_container_style = models.CharField(_('CSS styles'), max_length=300,
                                            null=True, blank=True)
     old_url = models.CharField(_('Old URL'), max_length=255, null=True, blank=True)
+    skip_old_website = models.BooleanField(_('Do not update page from old website'), default=False)
+
     redirect_link = models.CharField(_('redirect link'), max_length=300,
                                      blank=True, null=True)
     show_section_menu = models.BooleanField(_('show section menu'), default=True)
