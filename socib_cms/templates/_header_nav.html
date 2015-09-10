@@ -68,24 +68,6 @@
               {% endif %}
               </ul>              
               <ul class="nav navbar-nav navbar-right">
-                {% if user.is_staff %}
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="{% url 'admin:index' %}">{% trans 'Administration' %}<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        {% if news and news.pk %}
-                        <li><a href="{% url 'admin:news_news_change' news.pk %}">{% trans 'Modify this news' %}</a></li>
-                        {% endif %}
-                        {% if page and page.pk %}
-                        <li><a href="{% url 'admin:pages_page_change' page.pk %}">{% trans 'Modify this page' %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'admin:pages_page_changelist' %}">{% trans 'pages' %}</a></li>
-                        <li><a href="{% url 'admin:news_news_changelist' %}">{% trans 'news' %}</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{% url 'admin:auth_user_changelist' %}">{% trans 'users' %}</a></li>
-                        <li><a href="{% url 'admin:auth_group_changelist' %}">{% trans 'groups' %}</a></li>
-                    </ul>
-                </li>
-                {% endif %}
                   <li class="search-form">
                     <form action="{% url 'socib_search_view' %}" class="form-inline">
                       <div class="form-group">
@@ -96,8 +78,8 @@
                   </li>                
 
                   <li class="dropdown change-lang">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">{% trans 'Language' %} <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
+                      <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="glyphicon glyphicon-flag"></i> <span>{% trans 'Language' %}</span> <b class="caret"></b></a>
+                      <ul class="dropdown-menu">                          
                           {% for lang in LANGUAGES %}
                             {% ifequal lang.0 LANGUAGE_CODE %}
                                 <li class="active"><a href="#" class="change-lang" data-lang="{{ lang.0 }}">{{ lang.1 }}</a></li>
@@ -108,11 +90,25 @@
                       </ul>
                   </li>
                   {% if user.is_authenticated %}
-                  <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" ><i class="glyphicon glyphicon-user"></i> {{ request.user.username }} <b class="caret"></b></a>
+                  <li class="dropdown menu-user">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" ><i class="glyphicon glyphicon-user"></i> <span>{{ request.user.username }}</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'pages_change_profile' %}">{% trans 'Change profile' %}</a></li>
                         <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans 'Logout' %}</a></li>
+                    {% if user.is_staff %}
+                      <li class="divider"></li>
+                      {% if news and news.pk %}
+                      <li><a href="{% url 'admin:news_news_change' news.pk %}">{% trans 'Modify this news' %}</a></li>
+                      {% endif %}
+                      {% if page and page.pk %}
+                      <li><a href="{% url 'admin:pages_page_change' page.pk %}">{% trans 'Modify this page' %}</a></li>
+                      {% endif %}
+                      <li><a href="{% url 'admin:pages_page_changelist' %}">{% trans 'pages' %}</a></li>
+                      <li><a href="{% url 'admin:news_news_changelist' %}">{% trans 'news' %}</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'admin:auth_user_changelist' %}">{% trans 'users' %}</a></li>
+                      <li><a href="{% url 'admin:auth_group_changelist' %}">{% trans 'groups' %}</a></li>
+                    {% endif %}
                     </ul>
                   </li>
                   {% else %}
