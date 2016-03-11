@@ -22,5 +22,9 @@ urlpatterns = patterns(
     url(r'^(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+).html$',
         views.NewsDetailView.as_view(),
         name='news_detail',
+        ),
+    url(r'^$',
+        views.NewsListView.as_view(),
+        name='news_list',
         )
 )

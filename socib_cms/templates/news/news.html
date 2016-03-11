@@ -30,7 +30,7 @@
     {% endif %}
   </li>
   {% endfor %}
-  <li ><a href="{% url 'news_category_detail' news.category.slug %}">{{ page.title }}</a>
+  <li ><a href="{{ page.url|chlocale:LANGUAGE_CODE  }}">{{ page.title }}</a>
   </li>
   <li class="active">{{ news.title|truncatechars:70 }}
   </li>
@@ -84,11 +84,9 @@
         </ul>
     </footer>
     <div id="news-more-like-this">
-      <!--
         <div class="news-more-like-this">
           <h3 style="display: none;">{% trans "More like this" %}</h3>
         </div>
-      -->    
     </div>
   </div>
   <div class="col-md-4 col-sm-12">

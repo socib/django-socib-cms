@@ -3,6 +3,7 @@
 {% load socib_extras %}
 
 <ol class="breadcrumb">
+{% if page.pk %}
   {% for node in page.get_ancestors %}
   <li class="{{ node.css_class }}">
     {% if node.container %}
@@ -12,6 +13,7 @@
     {% endif %}
   </li>
   {% endfor %}
+{% endif %}
   <li class="active">{{ page.title }}
   </li>
 </ol>

@@ -1,9 +1,11 @@
 # coding: utf-8
 from datetime import datetime, time
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.syndication.views import Feed
 from localeurl.models import django_reverse as reverse
 from haystack.query import SearchQuerySet
@@ -29,11 +31,25 @@ class NewsCategoryDetailView(DetailView, BasePageView):
             page.title = self.object.name
         return page
 
+    def get_page_parent(self):
+        try:
+            url = reverse('news_category_detail',
+                          args=[self.object.slug])
+            page = Page.objects.get(url=url).parent
+        except ObjectDoesNotExist:
+            try:
+                url = reverse('news_list')
+                page = Page.objects.get(url=url)
+            except ObjectDoesNotExist:
+                page = Page()
+                page.title = self.object.name
+        return page
+
     def get_news(self):
         page = self.request.GET.get('page', 1)
         news_list = self.object.news_set.published()
         # Paginate results
-        paginator = Paginator(news_list, 10)  # Show 10 news per page
+        paginator = Paginator(news_list, 5)  # Show 5 news per page
         try:
             news_paginated = paginator.page(page)
         except PageNotAnInteger:
@@ -48,6 +64,33 @@ class NewsCategoryDetailView(DetailView, BasePageView):
         context = super(NewsCategoryDetailView, self).get_context_data(**kwargs)
         context['page'] = self.get_page()
         context['news_list'] = self.get_news()
+        context['category_page_parent'] = self.get_page_parent()
+        return context
+
+
+class NewsListView(ListView, BasePageView):
+
+    template_name = "news/list.html"
+    model = models.News
+    paginate_by = 5
+
+    def get_page(self):
+        try:
+            url = reverse('news_list')
+            page = Page.objects.get(url=url)
+        except ObjectDoesNotExist:
+            page = Page()
+            page.title = _('News')
+        return page
+
+    def get_queryset(self):
+        qs = super(NewsListView, self).get_queryset()
+        qs = qs.published()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsListView, self).get_context_data(**kwargs)
+        context['page'] = self.get_page()
         return context
 
 
@@ -70,8 +113,12 @@ class NewsDetailView(DetailView, BasePageView):
                           args=[self.object.category.slug])
             page = Page.objects.get(url=url)
         except ObjectDoesNotExist:
-            page = Page()
-            page.title = self.object.category.name
+            try:
+                url = reverse('news_list')
+                page = Page.objects.get(url=url)
+            except ObjectDoesNotExist:
+                page = Page()
+                page.title = self.object.category.name
         return page
 
     def get_context_data(self, **kwargs):

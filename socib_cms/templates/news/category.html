@@ -16,7 +16,28 @@
 {% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
 
 {% block breadscrumbs %}
-{% include '_breadcumb.html' %}
+<ol class="breadcrumb">
+{% if category_page_parent.pk %}
+  {% for node in category_page_parent.get_ancestors %}
+  <li class="{{ node.css_class }}">
+    {% if node.container %}
+    <a><span>{{ node.title }}</span></a>
+    {% else %}
+    <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title }}</span></a>
+    {% endif %}
+  </li>
+  {% endfor %}
+  <li class="{{ category_page_parent.css_class }}">
+    {% if category_page_parent.container %}
+    <a><span>{{ category_page_parent.title }}</span></a>
+    {% else %}
+    <a href="{{ category_page_parent.get_absolute_url|chlocale:LANGUAGE_CODE }}"><span>{{ category_page_parent.title }}</span></a>
+    {% endif %}
+  </li>
+{% endif %}
+  <li class="active">{{ page.title }}
+  </li>
+</ol>
 {% endblock %}
 
 {% block content %}
@@ -82,31 +103,6 @@
       {% endif %}
   </ul>
 </div>
-
-
-{% if page.list_children %}
-  <div class="row list-children-pages">
-  {% recursetree page.children %}
-    {% if not node.registration_required or user.is_authenticated %}
-    <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
-      <div class="panel panel-default">
-        <div class="panel-thumbnail">
-        {% if node.picture %}
-          <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
-        {% else %}
-          <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
-        {% endif %}
-        </div>
-        <div class="panel-body">
-          <p class="lead"><a href="{{ node.url|chlocale:LANGUAGE_CODE }}">{{ node.title }}</a></p>
-          <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-  {% endrecursetree %}
-  </div>
-{% endif %}
 
 {% endblock %}
 
