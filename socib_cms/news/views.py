@@ -86,6 +86,7 @@ class NewsListView(ListView, BasePageView):
     def get_queryset(self):
         qs = super(NewsListView, self).get_queryset()
         qs = qs.published()
+        qs = qs.filter(category__hide_cat_menu=False)
         return qs
 
     def get_context_data(self, **kwargs):

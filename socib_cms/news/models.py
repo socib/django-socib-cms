@@ -13,6 +13,7 @@ from socib_cms.utils import ClonableMixin
 class NewsCategory(models.Model):
     name = models.CharField(_('name'), max_length=100)
     slug = models.CharField(_('slug'), max_length=100, unique=True)
+    hide_cat_menu = models.BooleanField(_('Hide in categories menu'), default=False)
 
     class Meta:
         verbose_name = _('news category')

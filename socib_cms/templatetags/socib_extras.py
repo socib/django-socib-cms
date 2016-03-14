@@ -3,6 +3,7 @@ from django import template
 from django.contrib.sites.models import get_current_site
 from django.template.defaultfilters import stringfilter
 from localeurl.templatetags.localeurl_tags import chlocale as localeurl_chlocale
+from socib_cms.news.models import NewsCategory
 
 register = template.Library()
 
@@ -28,3 +29,7 @@ def chlocale(url, locale):
 
 chlocale = stringfilter(chlocale)
 register.filter('chlocale', chlocale)
+
+@register.assignment_tag
+def visible_categories():
+    return NewsCategory.objects.filter(hide_cat_menu=False)

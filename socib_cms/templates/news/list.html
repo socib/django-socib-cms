@@ -21,7 +21,8 @@
 
 {% block content %}
 {{ page.content|safe }}
-
+<div class="container">
+<div class="col-md-9">
 {% for news in object_list %}
   <div class="row">
     <div class="col-md-2 col-sm-3 text-center news-picture">
@@ -31,7 +32,7 @@
     </div>
     <div class="col-md-10 col-sm-9 news-content">
       <div class="row">
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-12 col-sm-12">
           <h3><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h3>
           <p>{{ news.summary|safe }}</p>
           <p class="pull-right">
@@ -48,41 +49,32 @@
             <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://socib.es{{ news.get_absolute_url }}&title={{ news.title }}" alt="{% trans "Share on linkedin" %}"><i class="fa fa-linkedin"></i></a></li>
           </ul>
 
-          </div>
-        <div class="col-md-3"></div>
+        </div>
       </div>
     </div>
   </div>
   <hr>
 {% endfor %}
+</div>
+    <!-- sidebar -->
+<div class="col-md-3">
 
+<h3>
+    <span class="fa-stack">
+      <i class="fa fa-square-o fa-stack-2x"></i>
+      <i class="fa fa-list fa-stack-1x"></i>
+    </span>
+    {% trans "Categories" %}
+</h3>
+    {% visible_categories as categories %}
+    <div class="list-group sidebar">
+        {% for c in categories %}
+            <a class="list-group-item" href="{% url 'news_category_detail' c.slug %}">{{ c.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+</div>
 {% include '_pagination.html' %}
-
-{% if page.list_children %}
-    {% for node in page.get_children %}
-      {% if not node.registration_required or user.is_authenticated %}
-        {% if not node.hide %}
-      <div class="col-md-4 col-sm-6 col-xs-12 {{ node.css_class }}">
-        <div class="panel panel-default">
-          <div class="panel-thumbnail">
-          {% if node.picture %}
-            <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% thumbnail node.picture 450x300 upscale crop subject_location=node.picture.subject_location  %}" class="img-responsive"></a>
-          {% else %}
-            <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><img src="{% static "images/page_no_image.gif" %}" class="img-responsive"></a>
-          {% endif %}
-          </div>
-          <div class="panel-body">
-            <p class="lead"><a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}">{{ node.title_menu }}</a></p>
-            <p>{% if node.introduction %}{{ node.introduction }}{% else %}{{ node.content|safe|striptags|truncatewords_html:20 }}{% endif %}</p>
-          </div>
-        </div>
-      </div>
-        {% cycle '' '' '<div class="clearfix visible-md visible-lg"></div>' %}
-        {% cycle '' '<div class="clearfix visible-sm"></div>' %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-{% endif %}
 
 {% endblock %}
 
