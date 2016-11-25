@@ -24,7 +24,7 @@ setup(
         'django-modeltranslation',
         'django-password-reset',
         'django-filer',
-        'django-taggit',
+        'django-taggit==0.12',
         'djangocms-admin-style',
         'django-admin-shortcuts',
         'python-ldap',
