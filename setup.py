@@ -23,9 +23,9 @@ setup(
         'django-localeurl',
         'django-modeltranslation',
         'django-password-reset',
-        'django-filer',
+        'django-filer==0.9.12',
         'django-taggit==0.12',
-        'djangocms-admin-style',
+        'djangocms-admin-style==0.2.8',  # fail to update to 1.2.6.2
         'django-admin-shortcuts',
         'python-ldap',
         'django-auth-ldap',
