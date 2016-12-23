@@ -37,7 +37,7 @@ setup(
         # 'django-genericadmin',  # 0.6.1 < github.com/arthanson/django-genericadmin
         'elasticsearch',  # 1.3.0 to 5.0.1
         'haystack',  # 0.15 to 0.36
-        'django-haystack'  # 2.3.1 to 2.5.1
+        'django-haystack',  # 2.3.1 to 2.5.1
         'django-ckeditor',
         'django-ckeditor-filebrowser-filer'
     ),
