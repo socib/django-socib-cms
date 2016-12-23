@@ -1,8 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import views
 
-urlpatterns = patterns(
-    'socib_cms.news.views',
+urlpatterns = [
     url(r'^rss/$',
         views.NewsFeed(),
         name='news_feed'
@@ -27,4 +26,4 @@ urlpatterns = patterns(
         views.NewsListView.as_view(),
         name='news_list',
         )
-)
+]

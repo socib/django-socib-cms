@@ -2,15 +2,15 @@ from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea, TextInput
 from modeltranslation.admin import TranslationAdmin
-from ckeditor_filer.widgets import CKEditorWidget
+# from ckeditor_filer.widgets import CKEditorWidget
 from filer.fields.folder import FilerFolderField, AdminFolderFormField
 import models
 
 
 class AuditModelAdmin(admin.ModelAdmin):
     readonly_fields = ('created_by', 'updated_by',)
-    formfield_overrides = {
-        TextField: {'widget': CKEditorWidget(config_name='default')}, }
+    # formfield_overrides = {
+    #    TextField: {'widget': CKEditorWidget(config_name='default')}, }
 
     def save_model(self, request, obj, form, change):
         obj.save(user=request.user)
@@ -24,7 +24,7 @@ class NewsAdmin(AuditModelAdmin, TranslationAdmin):
     search_fields = ['title']
     actions = ['make_published', 'clone']
     formfield_overrides = {
-        TextField: {'widget': CKEditorWidget(config_name='default')},
+        # TextField: {'widget': CKEditorWidget(config_name='default')},
         FilerFolderField: {'form_class': AdminFolderFormField}}
 
     def clone(self, request, queryset):

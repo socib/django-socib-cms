@@ -18,15 +18,15 @@ Quick start
         'socib_cms.pages',
         'socib_cms.news',
         # required apps
-        'ckeditor_filer',
+        'filer',
+        'ckeditor_filebrowser_filer',
+        'ckeditor',
         'compressor',
         'envelope',
         'mptt',
         'django_tables2',
         'crispy_forms',
-        'localeurl',
         'modeltranslation',
-        'filer',
         'easy_thumbnails',
         'password_reset',
         'admin_shortcuts',
@@ -39,8 +39,6 @@ Quick start
         'django.contrib.flatpages',
         'django.contrib.humanize',
         ...
-        # optional, but recommended
-        'south',
     )
 ```
 
@@ -51,15 +49,6 @@ Quick start
         'easy_thumbnails': 'easy_thumbnails.south_migrations',
         'taggit': 'taggit.south_migrations',
     }
-
-    TEMPLATE_CONTEXT_PROCESSORS += (
-        'django.core.context_processors.request',
-        'django.core.context_processors.i18n',
-    )
-
-    MIDDLEWARE_CLASSES += (
-        'localeurl.middleware.LocaleURLMiddleware',
-    )
 
     CRISPY_TEMPLATE_PACK = 'bootstrap3'
     ADMIN_SHORTCUTS_SETTINGS = {

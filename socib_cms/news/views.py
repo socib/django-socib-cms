@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.syndication.views import Feed
-from localeurl.models import django_reverse as reverse
+from django.core.urlresolvers import reverse
 from haystack.query import SearchQuerySet
 from socib_cms.pages.views import BasePageView
 from socib_cms.pages.models import Page

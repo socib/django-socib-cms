@@ -31,7 +31,7 @@ class NewsQuerySet(models.query.QuerySet):
 class NewsManager(models.Manager):
     use_for_related_fields = True
 
-    def get_query_set(self):
+    def get_queryset(self):
         return NewsQuerySet(self.model)
 
     def published(self, *args, **kwargs):
@@ -57,7 +57,7 @@ class News(models.Model, ClonableMixin):
                                      blank=True, null=True)
     slug = models.CharField(_('slug'), max_length=100)
     related = models.ManyToManyField('self', verbose_name=_('related news'),
-                                     blank=True, null=True)
+                                     blank=True)
     picture = FilerImageField(verbose_name=_('picture'), null=True, blank=True,
                               on_delete=models.SET_NULL)
     attachment = FilerFileField(verbose_name=_('attachment'), null=True, blank=True,
@@ -72,11 +72,11 @@ class News(models.Model, ClonableMixin):
     # Audit
     created_on = models.DateTimeField(_('date added'), auto_now_add=True)
     created_by = models.ForeignKey(User, blank=True, null=True,
-                                   editable=False, related_name='created-news',
+                                   editable=False, related_name='created_news',
                                    verbose_name=_('created by'))
     updated_on = models.DateTimeField(_('date modified'), auto_now=True)
     updated_by = models.ForeignKey(User, blank=True, null=True,
-                                   editable=False, related_name='updated-news',
+                                   editable=False, related_name='updated_news',
                                    verbose_name=_('update by'))
 
     class Meta:

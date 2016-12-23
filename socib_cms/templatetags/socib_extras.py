@@ -1,8 +1,7 @@
 # coding: utf-8
 from django import template
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.template.defaultfilters import stringfilter
-from localeurl.templatetags.localeurl_tags import chlocale as localeurl_chlocale
 from socib_cms.news.models import NewsCategory
 
 register = template.Library()
@@ -25,7 +24,8 @@ def chlocale(url, locale):
     if url and url[0] != '/':
         return url
     else:
-        return localeurl_chlocale(url, locale)
+        # return localeurl_chlocale(url, locale)
+        return url
 
 chlocale = stringfilter(chlocale)
 register.filter('chlocale', chlocale)

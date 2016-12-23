@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, HTML, ButtonHolder
 from crispy_forms.bootstrap import StrictButton
-from envelope.forms import BaseContactForm
+from envelope.forms import ContactForm
 from haystack.forms import FacetedSearchForm
 
 
@@ -79,7 +79,7 @@ class UserProfileForm(forms.Form):
         self.fields['email'].initial = self.user.email
 
 
-class WebContactForm(BaseContactForm):
+class WebContactForm(ContactForm):
     institution = forms.CharField(label=_('institution/association'), required=False)
     location = forms.CharField(label=_('location'), required=False)
 

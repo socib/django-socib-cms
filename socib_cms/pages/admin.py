@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 from django.db.models import TextField
 from django.contrib.sites.models import Site
 from django.forms import Textarea, TextInput
-from ckeditor_filer.widgets import CKEditorWidget
+from ckeditor.widgets import CKEditorWidget
 from django_ace import AceWidget
 from filer.fields.folder import FilerFolderField, AdminFolderFormField
 from mptt.admin import MPTTModelAdmin
@@ -22,6 +22,7 @@ class PageForm(FlatpageForm):
         self.fields['url'].initial = u'/auto-generate-url-from-title/'
 
     class Meta:
+        fields = '__all__'
         model = models.Page
         widgets = {
             'js_code': AceWidget(mode='javascript', theme='dawn',

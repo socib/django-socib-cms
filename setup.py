@@ -16,34 +16,34 @@ setup(
     include_package_data=True,
     license='MIT License',
     install_requires=(
-        'Django==1.6',
+        'Django==1.9.12',
         'Pillow',
-        'easy-thumbnails>=1.0',
-        'django-mptt==0.6',
-        'django-localeurl',
+        'easy-thumbnails',
+        'django-mptt',  # 0.6 to 0.8.6
         'django-modeltranslation',
         'django-password-reset',
-        'django-filer==0.9.12',
-        'django-taggit==0.12',
-        'djangocms-admin-style==0.2.8',  # fail to update to 1.2.6.2
+        'django-filer',  # 0.9.12 to 1.2.5
+        'django-taggit',  # 0.12 to 0.21.3
+        'djangocms-admin-style',  # 0.2.8 to 1.2.6.2
         'django-admin-shortcuts',
         'python-ldap',
         'django-auth-ldap',
-        'django-envelope==0.7',
+        'django-envelope',  # 0.7 to 1.7
         'django-honeypot',
         'django-crispy-forms',
-        'django-tables2==0.15.0',
-        'django_compressor==1.4',
-        # 'ckeditor_filer',
+        'django-tables2',  # 0.15.0 to 1.2.6
+        'django_compressor',
         'django-ace',
-        'django-genericadmin==0.6.1',
-        'elasticsearch==1.3.0',
-        'haystack==0.15',
-        'django-haystack==2.3.1'
+        # 'django-genericadmin',  # 0.6.1 < github.com/arthanson/django-genericadmin
+        'elasticsearch',  # 1.3.0 to 5.0.1
+        'haystack',  # 0.15 to 0.36
+        'django-haystack'  # 2.3.1 to 2.5.1
+        'django-ckeditor',
+        'django-ckeditor-filebrowser-filer'
     ),
-    # dependency_links=[
-    #     'git+https://github.com/bielfrontera/django-ckeditor-filer.git#egg=ckeditor_filer-1.0'
-    # ],
+    dependency_links=[
+        'git+https://github.com/arthanson/django-genericadmin.git#egg=django_genericadmin-0.6.1'
+    ],
     classifiers=[
         'Development Status :: 1 - Beta',
         'Environment :: Web Environment',

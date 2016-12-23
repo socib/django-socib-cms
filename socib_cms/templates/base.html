@@ -120,15 +120,6 @@
             $('#subnav').removeClass('fixed');
           }
         });
-        // Change language. Set selected locale in session
-        $('a.change-lang').click(function(event) {
-          var locale = $(this).data('locale');
-          $.post( "{% url 'localeurl_change_locale' %}",
-            {
-              locale: locale,
-              csrfmiddlewaretoken: '{{ csrf_token }}'
-            });
-        });
       });
     </script>
     {% block page_js %}{% endblock page_js %}

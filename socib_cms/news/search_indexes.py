@@ -1,7 +1,7 @@
 from haystack import indexes
 from django.utils import translation
 from django.core.exceptions import ObjectDoesNotExist
-from localeurl.models import django_reverse as reverse
+from django.core.urlresolvers import reverse
 from socib_cms.pages.models import Page
 import models
 

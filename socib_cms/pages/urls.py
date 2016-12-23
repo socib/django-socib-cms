@@ -1,8 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import views
 
-urlpatterns = patterns(
-    'socib_cms.pages.views',
+urlpatterns = [
     # catch all
     url(r'^registration/change_profile$',
         views.ChangeProfileView.as_view(),
@@ -26,4 +25,4 @@ urlpatterns = patterns(
         name='pages_home',
         kwargs={'url': ''}
         ),
-)
+]

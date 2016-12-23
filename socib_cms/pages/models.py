@@ -29,9 +29,9 @@ class Page(MPTTModel, FlatPage):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children',
                             verbose_name=_('parent'))
     related = models.ManyToManyField('self', verbose_name=_('related pages'),
-                                     blank=True, null=True)
+                                     blank=True)
     groups = models.ManyToManyField(Group, verbose_name=_('user groups allowed'),
-                                    blank=True, null=True)
+                                    blank=True)
     is_container = models.BooleanField(_('page is just a container'), default=False)
     hide = models.BooleanField(_('hide this page in lists'), default=False)
     list_children = models.BooleanField(
@@ -73,11 +73,11 @@ class Page(MPTTModel, FlatPage):
     # Audit
     created_on = models.DateTimeField(_('date added'), auto_now_add=True)
     created_by = models.ForeignKey(User, blank=True, null=True,
-                                   editable=False, related_name='created-page',
+                                   editable=False, related_name='created_page',
                                    verbose_name=_('created by'))
     updated_on = models.DateTimeField(_('date modified'), auto_now=True)
     updated_by = models.ForeignKey(User, blank=True, null=True,
-                                   editable=False, related_name='updated-page',
+                                   editable=False, related_name='updated_page',
                                    verbose_name=_('update by'))
 
     tree = TreeManager()

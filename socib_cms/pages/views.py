@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from envelope.views import ContactView
 from haystack.views import FacetedSearchView
-from localeurl.models import django_reverse as reverse
+from django.core.urlresolvers import reverse
 import models
 import forms
 

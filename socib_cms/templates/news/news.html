@@ -3,7 +3,8 @@
 {% load staticfiles %}
 {% load mptt_tags %}
 {% load thumbnail %}
-{% load localeurl_tags %}
+{% load socib_extras %}
+
 
 {% block title_head %}{{ block.super }}: {{ news.title }}{% endblock %}
 
@@ -26,11 +27,11 @@
     {% if node.container %}
     <a><span>{{ node.title }}</span></a>
     {% else %}
-    <a href="{{ node.url|chlocale:LANGUAGE_CODE  }}"><span>{{ node.title }}</span></a>
+    <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title }}</span></a>
     {% endif %}
   </li>
   {% endfor %}
-  <li ><a href="{{ page.url|chlocale:LANGUAGE_CODE  }}">{{ page.title }}</a>
+  <li ><a href="{{ page.url|chlocale:LANGUAGE_CODE }}">{{ page.title }}</a>
   </li>
   <li class="active">{{ news.title|truncatechars:70 }}
   </li>

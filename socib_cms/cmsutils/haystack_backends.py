@@ -9,7 +9,10 @@ from haystack.constants import DEFAULT_ALIAS
 
 
 def get_using(language, alias=DEFAULT_ALIAS):
-    new_using = alias + "_" + language
+    if language:
+        new_using = alias + "_" + language
+    else:
+        new_using = alias
     using = new_using if new_using in settings.HAYSTACK_CONNECTIONS else alias
     return using
 
@@ -17,7 +20,7 @@ def get_using(language, alias=DEFAULT_ALIAS):
 class MultilingualElasticsearchSearchBackend(ElasticsearchSearchBackend):
     def update(self, index, iterable, commit=True, multilingual=True):
         if multilingual:
-            initial_language = translation.get_language()[:2]
+            initial_language = translation.get_language()
             # retrieve unique backend name
             backends = []
             for language, __ in settings.LANGUAGES:
@@ -39,7 +42,7 @@ class MultilingualElasticsearchSearchBackend(ElasticsearchSearchBackend):
 
 class MultilingualElasticsearchSearchQuery(ElasticsearchSearchQuery):
     def __init__(self, using=DEFAULT_ALIAS):
-        language = translation.get_language()[:2]
+        language = translation.get_language()
         using = get_using(language)
         super(MultilingualElasticsearchSearchQuery, self).__init__(using)
 
