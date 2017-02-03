@@ -3,17 +3,15 @@
 {% load socib_extras %}
 
 <ol class="breadcrumb">
-{% if page.pk %}
   {% for node in page.get_ancestors %}
   <li class="{{ node.css_class }}">
     {% if node.container %}
-    <a><span>{{ node.title }}</span></a>
+    <a><span>{{ node.title|capfirst }}</span></a>
     {% else %}
-    <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title }}</span></a>
+    <a href="{{ node.get_absolute_url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title|capfirst }}</span></a>
     {% endif %}
   </li>
   {% endfor %}
-{% endif %}
-  <li class="active">{{ page.title }}
+  <li class="active">{{ page.title|capfirst }}
   </li>
 </ol>

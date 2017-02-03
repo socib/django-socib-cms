@@ -7,11 +7,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.syndication.views import Feed
-from django.core.urlresolvers import reverse
 from haystack.query import SearchQuerySet
 from socib_cms.pages.views import BasePageView
 from socib_cms.pages.models import Page
 from socib_cms.cmsutils.views import JSONResponseMixin
+from socib_cms.cmsutils.utils import reverse_no_i18n
 import models
 
 
@@ -22,23 +22,32 @@ class NewsCategoryDetailView(DetailView, BasePageView):
     context_object_name = 'category'
 
     def get_page(self):
+        url = reverse_no_i18n('news_category_detail',
+                              args=[self.object.slug])
         try:
-            url = reverse('news_category_detail',
-                          args=[self.object.slug])
             page = Page.objects.get(url=url)
         except ObjectDoesNotExist:
             page = Page()
             page.title = self.object.name
+            page.url = url
+            url_news_page = reverse_no_i18n('news_list')
+            try:
+                news_page = Page.objects.get(url=url_news_page)
+            except ObjectDoesNotExist:
+                news_page = Page()
+                news_page.title = _('News')
+                news_page.url = url_news_page
+            page.parent = news_page
         return page
 
     def get_page_parent(self):
         try:
-            url = reverse('news_category_detail',
-                          args=[self.object.slug])
+            url = reverse_no_i18n('news_category_detail',
+                                  args=[self.object.slug])
             page = Page.objects.get(url=url).parent
         except ObjectDoesNotExist:
             try:
-                url = reverse('news_list')
+                url = reverse_no_i18n('news_list')
                 page = Page.objects.get(url=url)
             except ObjectDoesNotExist:
                 page = Page()
@@ -75,12 +84,14 @@ class NewsListView(ListView, BasePageView):
     paginate_by = 5
 
     def get_page(self):
+        url = reverse_no_i18n('news_list')
         try:
-            url = reverse('news_list')
             page = Page.objects.get(url=url)
         except ObjectDoesNotExist:
+            print 'pagina news no existeix'
             page = Page()
             page.title = _('News')
+            page.url = url
         return page
 
     def get_queryset(self):
@@ -109,17 +120,23 @@ class NewsDetailView(DetailView, BasePageView):
         return super(NewsDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_page(self):
+
+        url = reverse_no_i18n('news_category_detail',
+                              args=[self.object.category.slug])
         try:
-            url = reverse('news_category_detail',
-                          args=[self.object.category.slug])
             page = Page.objects.get(url=url)
         except ObjectDoesNotExist:
+            page = Page()
+            page.title = self.object.category.name
+            page.url = url
+            url_news_page = reverse_no_i18n('news_list')
             try:
-                url = reverse('news_list')
-                page = Page.objects.get(url=url)
+                news_page = Page.objects.get(url=url_news_page)
             except ObjectDoesNotExist:
-                page = Page()
-                page.title = self.object.category.name
+                news_page = Page()
+                news_page.title = _('News')
+                news_page.url = url_news_page
+            page.parent = news_page
         return page
 
     def get_context_data(self, **kwargs):

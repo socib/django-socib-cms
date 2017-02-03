@@ -3,6 +3,7 @@ from django import template
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.defaultfilters import stringfilter
 from socib_cms.news.models import NewsCategory
+from socib_cms.cmsutils.utils import change_url_language
 
 register = template.Library()
 
@@ -24,11 +25,12 @@ def chlocale(url, locale):
     if url and url[0] != '/':
         return url
     else:
-        # return localeurl_chlocale(url, locale)
-        return url
+        return change_url_language(url, locale)
+
 
 chlocale = stringfilter(chlocale)
 register.filter('chlocale', chlocale)
+
 
 @register.assignment_tag
 def visible_categories():

@@ -148,3 +148,13 @@ class Page(MPTTModel, FlatPage):
             self.unhidden_children_count = self.get_children().filter(hide=False).count()
 
         return not self.unhidden_children_count
+
+    def get_ancestors(self, ascending=False, include_self=False):
+        if self._is_saved():
+            return super(Page, self).get_ancestors(ascending, include_self)
+        elif self.parent:
+            if include_self:
+                return [self] + list(self.parent.get_ancestors(include_self=True))
+            return self.parent.get_ancestors(include_self=True)
+        else:
+            self._tree_manager.none()

@@ -3,7 +3,6 @@
 {% load staticfiles %}
 {% load mptt_tags %}
 {% load thumbnail %}
-{% load humanize %}
 {% load socib_extras %}
 {% load querystring from django_tables2 %}
 
@@ -40,7 +39,7 @@
             {% endfor %}
           </p>
           <ul class="list-inline">
-              <li><a href="{{ news.get_absolute_url }}">{{ news.publish_date|naturalday }}</a>
+              <li><a href="{{ news.get_absolute_url }}">{{ news.publish_date }}</a>
               </li> | <li>Share:</li>
             <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://socib.es{{ news.get_absolute_url }}" alt="{% trans "Share on facebook" %}"><i class="fa fa-facebook"></i></a></li>
             <li><a target="_blank" href="https://twitter.com/home?status={{news.title|truncatechars:100}} http://socib.es{{ news.get_absolute_url }} via @socib_icts" alt="{% trans "Share on twitter" %}"><i class="fa fa-twitter"></i></a></li>

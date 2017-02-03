@@ -21,17 +21,17 @@
 {% block mainclass %}container {{ page.css_class }}{% endblock mainclass%}
 
 {% block breadscrumbs %}
-<ol class="breadcrumb">
+<ol class="breadcrumb">  
   {% for node in page.get_ancestors %}
   <li class="{{ node.css_class }}">
     {% if node.container %}
-    <a><span>{{ node.title }}</span></a>
+    <a><span>{{ node.title|capfirst }}</span></a>
     {% else %}
-    <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title }}</span></a>
+    <a href="{{ node.url|chlocale:LANGUAGE_CODE }}"><span>{{ node.title|capfirst }}</span></a>
     {% endif %}
   </li>
-  {% endfor %}
-  <li ><a href="{{ page.url|chlocale:LANGUAGE_CODE }}">{{ page.title }}</a>
+  {% endfor %}  
+  <li ><a href="{{ page.url|chlocale:LANGUAGE_CODE }}">{{ page.title|capfirst }}</a>
   </li>
   <li class="active">{{ news.title|truncatechars:70 }}
   </li>

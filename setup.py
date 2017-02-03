@@ -35,7 +35,7 @@ setup(
         'django_compressor',
         'django-ace',
         # 'django-genericadmin',  # 0.6.1 < github.com/arthanson/django-genericadmin
-        'elasticsearch',  # 1.3.0 to 5.0.1
+        'elasticsearch==1.9.0',  # 2.0 is not compatible with mlt
         'haystack',  # 0.15 to 0.36
         'django-haystack',  # 2.3.1 to 2.5.1
         'django-ckeditor',
