@@ -85,9 +85,11 @@
         </ul>
     </footer>
     <div id="news-more-like-this">
+        <!-- 
         <div class="news-more-like-this">
-          <h3 style="display: none;">{% trans "More like this" %}</h3>
+          <h3>{% trans "More like this" %}</h3>
         </div>
+        -->
     </div>
   </div>
   <div class="col-md-4 col-sm-12">
@@ -154,9 +156,8 @@
           $("<ul />", {
             "class": "list-group news-more-like-this-list",
             html: items.join("")
-          }).appendTo(element);
-          element.find('h3').show();
-        });        
+          }).appendTo(element);          
+        });
       },
     });    
 
