@@ -39,7 +39,9 @@ setup(
         'haystack',  # 0.15 to 0.36
         'django-haystack',  # 2.3.1 to 2.5.1
         'django-ckeditor',
-        'django-ckeditor-filebrowser-filer'
+        'django-ckeditor-filebrowser-filer',
+        'packaging',
+        'appdirs'
     ),
     dependency_links=[
         'git+https://github.com/arthanson/django-genericadmin.git#egg=django_genericadmin-0.6.1'
