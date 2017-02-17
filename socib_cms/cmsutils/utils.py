@@ -15,11 +15,11 @@ def change_url_language(url, language):
         languages = [lang[0] for lang in settings.LANGUAGES]
         m = re.match(r'/([^/]*)(/.*$)', url)
         if m and m.groups()[0] in languages:
-            return "/{lang}{url}".format(
+            return u"/{lang}{url}".format(
                 lang=language,
                 url=m.groups()[1])
 
-    return "/{lang}{url}".format(
+    return u"/{lang}{url}".format(
         lang=language,
         url=url)
     return url
