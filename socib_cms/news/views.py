@@ -12,6 +12,7 @@ from socib_cms.pages.views import BasePageView
 from socib_cms.pages.models import Page
 from socib_cms.cmsutils.views import JSONResponseMixin
 from socib_cms.cmsutils.utils import reverse_no_i18n
+from django.conf import settings
 import models
 
 
@@ -81,7 +82,7 @@ class NewsListView(ListView, BasePageView):
 
     template_name = "news/list.html"
     model = models.News
-    paginate_by = 5
+    paginate_by = settings.NEWS_PER_PAGE if hasattr(settings, 'NEWS_PER_PAGE') else 5
 
     def get_page(self):
         url = reverse_no_i18n('news_list')
