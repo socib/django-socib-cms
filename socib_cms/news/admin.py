@@ -51,15 +51,15 @@ class NewsAdmin(AuditModelAdmin, TranslationAdmin):
     clone.short_description = "Clone selected news"
     make_published.short_description = "Mark selected news as published"
 
-    def formfield_for_dbfield(self, db_field, **kwargs):
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
         if db_field.name == 'introduction':
             kwargs['widget'] = Textarea(
                 attrs={'rows': 4, 'cols': 60, 'style': 'width: auto;'})
         if db_field.name in ["title", "slug"]:
             kwargs['widget'] = TextInput(
                 attrs={'style': 'width: 700px;'})
-        field = super(NewsAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        self.patch_translation_field(db_field, field, **kwargs)
+        field = super(NewsAdmin, self).formfield_for_dbfield(db_field, request, **kwargs)
+        self.patch_translation_field(db_field, field, request, **kwargs)
         return field
 
     class Media:

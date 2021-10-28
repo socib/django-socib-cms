@@ -83,13 +83,13 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
 
     def save_model(self, request, obj, form, change):
         if obj.url == u'/auto-generate-url-from-title/':
-            if obj.parent.id:
+            if obj.parent and obj.parent.id:
                 obj.url = "%s%s/" % (obj.parent.url, slugify(obj.title)[0:25])
             else:
                 obj.url = "/%s/" % slugify(obj.title)[0:50]
         obj.save()
 
-    def formfield_for_dbfield(self, db_field, **kwargs):
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
         if db_field.name in ['introduction', 'picture_description']:
             kwargs['widget'] = Textarea(
                 attrs={'rows': 4, 'cols': 60, 'style': 'width: auto;'})
@@ -98,8 +98,8 @@ class PageAdmin(MPTTModelAdmin, TranslationAdmin, FlatPageAdmin):
         if db_field.name in ["title", "title_menu", "css_container_style"]:
             kwargs['widget'] = TextInput(
                 attrs={'style': 'width: 700px;'})
-        field = super(PageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        self.patch_translation_field(db_field, field, **kwargs)
+        field = super(PageAdmin, self).formfield_for_dbfield(db_field, request, **kwargs)
+        self.patch_translation_field(db_field, field, request, **kwargs)
         return field
 
     def create_child(self, request, queryset):
