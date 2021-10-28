@@ -61,6 +61,7 @@ class Migration(migrations.Migration):
                 ('content_columns', models.IntegerField(default=12, verbose_name='content columns')),
                 ('extra_content_columns', models.IntegerField(default=4, verbose_name='extra content columns')),
                 ('float_extra_content', models.BooleanField(default=True, verbose_name='float extra content')),
+                ('show_section_menu',models.BooleanField(default=True, verbose_name='show section menu')),
                 ('lft', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),

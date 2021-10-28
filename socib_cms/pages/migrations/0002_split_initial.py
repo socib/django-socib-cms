@@ -20,12 +20,6 @@ class Migration(migrations.Migration):
     ),
     migrations.AddField(
         model_name='page',
-        name='show_section_menu',
-        field=models.BooleanField(default=True, verbose_name='show section menu'),
-        preserve_default=False,
-    ),
-    migrations.AddField(
-        model_name='page',
         name='created_on',
         field=models.BooleanField(default=True, verbose_name='show section menu'),
         preserve_default=False,
@@ -40,18 +34,6 @@ class Migration(migrations.Migration):
         model_name='page',
         name='created_by',
         field=models.ForeignKey(related_name='created-page', blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='created by'),
-        preserve_default=False,
-    ),
-    migrations.AddField(
-        model_name='page',
-        name='groups',
-        field=models.ManyToManyField(to='auth.Group', null=True, verbose_name='user groups allowed', blank=True),
-        preserve_default=False,
-    ),
-    migrations.AddField(
-        model_name='page',
-        name='related',
-        field=models.ManyToManyField(related_name='related_rel_+', null=True, verbose_name='related pages', to='pages.Page', blank=True),
         preserve_default=False,
     ),
     migrations.AddField(

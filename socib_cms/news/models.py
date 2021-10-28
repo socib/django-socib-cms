@@ -35,10 +35,10 @@ class NewsManager(models.Manager):
         return NewsQuerySet(self.model)
 
     def published(self, *args, **kwargs):
-        return self.get_query_set().published(*args, **kwargs)
+        return self.get_queryset().published(*args, **kwargs)
 
     def latest(self, num_records, *args, **kwargs):
-        return self.get_query_set().published(*args, **kwargs)[:num_records]
+        return self.get_queryset().published(*args, **kwargs)[:num_records]
 
     def latest10(self, *args, **kwargs):
         return self.latest(10, *args, **kwargs)
