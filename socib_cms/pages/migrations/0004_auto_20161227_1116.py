@@ -9,7 +9,7 @@ import django.db.models.manager
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0002_auto_20161202_1759'),
+        ('pages', '0003_auto_20161202_1759'),
     ]
 
     operations = [
