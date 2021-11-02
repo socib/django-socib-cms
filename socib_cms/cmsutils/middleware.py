@@ -1,8 +1,9 @@
  # coding: utf-8
 from django import http
+from django.utils.deprecation import MiddlewareMixin
 
 
-class FilterPersistMiddleware(object):
+class FilterPersistMiddleware(MiddlewareMixin):
     """Middleware adapted from https://code.djangoproject.com/ticket/3777#comment%3A4
     """
 
