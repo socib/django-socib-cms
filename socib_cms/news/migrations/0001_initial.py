@@ -62,7 +62,6 @@ class Migration(migrations.Migration):
                 ('name_ca', models.CharField(max_length=100, null=True, verbose_name='name')),
                 ('name_es', models.CharField(max_length=100, null=True, verbose_name='name')),
                 ('slug', models.CharField(unique=True, max_length=100, verbose_name='slug')),
-                ('hide_cat_menu', models.BooleanField(default=False, verbose_name='Hide in categories menu')),
             ],
             options={
                 'verbose_name': 'news category',
